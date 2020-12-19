@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/groups/{id}', [GroupController::class, 'show'])->name('groups.show');
     Route::get('/groups/{id}/payments', [GroupController::class, 'payments'])->name('groups.payments');
     Route::get('/groups/{id}/paymentsPDF', [GroupController::class, 'paymentsPDF'])->name('groups.paymentsPDF');
+    Route::get('/groups/{id}/pdf', [GroupController::class, 'pdf'])->name('groups.pdf');
 
     Route::get('/groups/{id}/composition', [GroupCompositionController::class, 'index'])->name('groups.composition.components');
     Route::get('/groups/{id}/composition/add', [GroupCompositionController::class, 'create'])->name('groups.composition.add');

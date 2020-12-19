@@ -32,9 +32,9 @@
         <p class="my-3 text-muted">&copy; 2020 <a href="https://pierluigipapeschi.com">Pier Luigi Papeschi</a></p>
         </form>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LcCCdYZAAAAAP-01Aac9yHTOY_rD-pnX7DWD7Gz"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render={{config('app.site_key')}}"></script>
     <script>
-        let siteKey = "6LcCCdYZAAAAAP-01Aac9yHTOY_rD-pnX7DWD7Gz"
+        let siteKey = "{{config('app.site_key')}}";
         grecaptcha.ready(function() {
             grecaptcha.execute(siteKey, {action: 'login'})
                 .then(function (token) {
