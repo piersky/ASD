@@ -15,7 +15,7 @@
                 </h2>
                 <dl class="row">
                     <dt class="col-sm-2">{{__('athletes.Fiscal Code')}}</dt>
-                    <dd class="col-sm-4">[{{$athlete->fiscal_code}}]</dd>
+                    <dd class="col-sm-4">{{$athlete->fiscal_code}}</dd>
                     <dt class="col-sm-2">{{__('athletes.Date of birth')}}</dt>
                     <dd class="col-sm-4">{{date('d/m/Y', strtotime($athlete->date_of_birth))}}</dd>
                     <dt class="col-sm-2">{{__('athletes.Phone')}}</dt>

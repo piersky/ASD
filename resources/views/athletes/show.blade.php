@@ -93,6 +93,20 @@
                         <input type="text" readonly name="country" id="country" class="form-control" value="{{old('country', $athlete->country)}}">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label for="begin_with_us_at"><strong>{{__('athletes.Begun with us')}}</strong></label>
+                        <input type="date" readonly name="begin_with_us_at" id="begin_with_us_at" class="form-control" value="{{$athlete->begin_with_us_at}}">
+                    </div>
+                    <div class="form-group col-3">
+                        <label for="end_with_us_at"><strong>{{__('athletes.End with us')}}</strong></label>
+                        <input type="date" readonly name="end_with_us_at" id="end_with_us_at" class="form-control" value="{{$athlete->end_with_us_at}}">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="society_come_from"><strong>{{__('athletes.Name of the society')}}</strong></label>
+                        <input type="text" readonly name="society_come_from" id="society_come_from" class="form-control" value="{{$athlete->society_come_from}}" placeholder="{{__('athletes.The name of the society')}}">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

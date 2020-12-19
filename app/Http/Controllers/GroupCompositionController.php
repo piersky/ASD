@@ -104,6 +104,7 @@ class GroupCompositionController extends Controller
     public function add( Request $request, $id) {
         $groupcomponent = new GroupComposition();
 
+        //TODO: choose year from settings
         $groupcomponent->year = '2020';
         $groupcomponent->athlete_id = $request->input('athlete_id');
         $groupcomponent->group_id = $id;

@@ -44,7 +44,7 @@
                                 <td>{{$group->name}}</td>
                                 <td class="text-center">{{$group->total}}</td>
                                 <td class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-light mr-1"><span class="fa fa-file-pdf-o"></span></a>
+                                    <a href="/groups/{{$group->id}}/pdf" class="btn btn-light mr-1"><span class="fa fa-file-pdf-o"></span></a>
                                     <a href="/groups/{{$group->id}}/edit" class="btn btn-light"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="{{route('groups.composition.components', $group->id)}}" class="btn btn-success mx-1"><span class="fa fa-users"></span></a>
                                     <a href="{{route('groups.payments', $group->id)}}" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\GroupTranslation;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
-use PDF;
 
 class GroupController extends Controller
 {
@@ -364,5 +364,40 @@ class GroupController extends Controller
         $pdf->setPaper('A4', 'landscape');
 
         return $pdf->download('payments_'.$group->name.'.pdf');
+    }
+
+    public function pdf($id){
+        $groupcomponents = DB::table('group_compositions AS g')
+            ->join('athletes AS a', 'g.athlete_id', '=', 'a.id')
+            ->select(
+                'g.id',
+                'a.*',
+                'a.id AS athlete_id'
+            )
+            ->where([
+                ['g.group_id','=', $id],
+                ['g.is_active', '=', '1']
+            ])
+            ->orderBy('a.lastname')
+            ->orderBy('a.firstname')
+            ->get();
+
+        $group = DB::table('groups AS g')
+            ->leftJoin('group_translations AS gt', 'gt.group_id', '=', 'g.id')
+            ->select('g.id', 'gt.name')
+            ->where('g.id', '=', $id)
+            //TODO: Use settings instead
+            ->where('gt.lang_id', '=', 'it')
+            ->first();
+
+        $pdf = PDF::loadView('groups.pdf', [
+            'group_name' => $group->name,
+            'groupcomponents' => $groupcomponents
+        ]);
+
+        $pdf->setPaper('A4', 'portrait');
+
+        //return view('groups.pdf', ['group_name' => $group->name, 'groupcomponents' => $groupcomponents]);
+        return $pdf->download('group_'.$group->name.'.pdf');
     }
 }

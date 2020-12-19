@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GroupComposition;
 use Illuminate\Http\Request;
 use App\Models\Athlete;
 use Illuminate\Support\Facades\DB;
@@ -81,9 +82,17 @@ class AthleteController extends Controller
     {
         $athlete = new Athlete();
 
+        $groups = DB::table('groups AS g')
+            ->leftJoin('group_translations AS gt', 'gt.group_id', '=', 'g.id')
+            ->select('g.id', 'gt.name')
+            ->where('g.is_active', '=', 1)
+            //TODO: Use settings instead
+            ->where('gt.lang_id', '=', 'it')
+            ->get();
+
         //$parents = Parent::all();
 
-        return view('athletes.createathlete', ['athlete' => $athlete]);
+        return view('athletes.createathlete', ['athlete' => $athlete, 'groups' => $groups]);
     }
 
     /**
@@ -135,6 +144,19 @@ class AthleteController extends Controller
         }
 
         $athlete->save();
+
+        $groupcomponent = new GroupComposition();
+
+        if ($request->input('group_id') != "") {
+            //TODO: choose year from settings
+            $groupcomponent->year = '2020';
+            $groupcomponent->athlete_id = $athlete->id;
+            $groupcomponent->group_id = $request->input('group_id');
+            $groupcomponent->created_by = Auth::user()->id;
+            $groupcomponent->updated_by = Auth::user()->id;
+
+            $groupcomponent->save();
+        }
 
         return redirect('/athletes')->with('success', 'Athlete saved!');
     }
@@ -223,10 +245,15 @@ class AthleteController extends Controller
      */
     public function destroy($id)
     {
+        //TODO: need to be deleted the payments & group compsitions too
+        $group_owned = DB::table('group_compositions')
+            ->where('athlete_id', '=', $id)
+            ->where('year', '=', '2020')
+            ->first();
+        $group_owned->delete();
+
         $athlete = Athlete::find($id);
         $result = $athlete->delete();
-
-        //TODO: need to be deleted the payments & group compsitions too
 
         if (request()->ajax()) return '' . $result;
         else return redirect()->back();

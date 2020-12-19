@@ -105,11 +105,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-1">
+                        <div class="form-group col-sm-3">
+                            <label for="group_id"><strong>{{__('Group')}}</strong></label>
+                            <select id="group_id" name="group_id" class="form-control">
+                                <option value="">{{__('Select')}}</option>
+                                @foreach($groups as $group)
+                                    <option value="{{$group->id}}">{{$group->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-2">
                             <label for="is_active"><strong>{{__('athletes.Is active')}}</strong></label>
                             <input type="checkbox" name="is_active" id="is_active" class="form-control" checked>
                         </div>
-                        <div class="form-group col-8">
+                        <div class="form-group col-7">
                             <label for="photo">Photo</label>
                             <input type="file" name="photo" id="photo" class="form-control">
                         </div>

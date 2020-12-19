@@ -60,12 +60,12 @@
                         <tbody>
                         @foreach($athletes as $athlete)
                             <tr id="tr-{{$athlete->id}}" class="{{($athlete->is_active?"":'bg-secondary text-white-50')}}">
-                                <td class="text-left text-uppercase">{{$athlete->lastname}} {{$athlete->firstname}}</td>
-                                <td class="text-center">{{$athlete->gender=="F"?"F":"M"}}</td>
-                                <td class="text-center">{{date('d/m/Y', strtotime($athlete->date_of_birth))}} ({{$athlete->birth_province}})</td>
-                                <td class="text-center">{{$athlete->phone}}</td>
-                                <td class="text-center">{{$athlete->email}}</td>
-                                <td class="text-center"><a href="/groups/{{$athlete->group_id}}/composition">{{$athlete->group_name}}</a></td>
+                                <td class="text-left text-uppercase" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->lastname}} {{$athlete->firstname}}</td>
+                                <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->gender=="F"?"F":"M"}}</td>
+                                <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{date('d/m/Y', strtotime($athlete->date_of_birth))}} ({{$athlete->birth_province}})</td>
+                                <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->phone}}</td>
+                                <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';"><a href="mailto:{{$athlete->email}}">{{$athlete->email}}</a></td>
+                                <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';"><a href="/groups/{{$athlete->group_id}}/composition">{{$athlete->group_name}}</a></td>
                                 <td class="d-flex justify-content-end">
                                     <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$athlete->id}}/payments" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
@@ -126,7 +126,7 @@
                 $('#deleteModal').modal('show');
 
                 $('#btn-elimina').on('click', function () {
-                    $.ajax({
+                    var request = $.ajax({
                         url: url,
                         method: 'DELETE',
                         data: {
@@ -139,7 +139,14 @@
                             } else {
                                 console.log('Problem contacting the server');
                             }
+                        },
+                        error: function(req, err) {
+                            console.log("Errore " + err);
                         }
+                    });
+
+                    request.fail(function(jqXHR, textStatus) {
+                        console.log( "Request failed: " + textStatus );
                     });
                 });
             });
