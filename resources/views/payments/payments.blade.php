@@ -1,0 +1,102 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1 class="text-uppercase">{{__('payments.Payments')}}</h1>
+            </div>
+            @if(session()->has('message'))
+                @component('components.alert-info')
+                    {{session()->get('message')}}
+                @endcomponent
+            @endif
+            <div class="col-sm-8">
+                @if(session()->get('success'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success') }}
+                    </div>
+                @elseif(session()->get('error'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error') }}
+                    </div>
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 my-2">
+                <a href="{{route('payments.create')}}" class="btn btn-primary text-uppercase">{{__('payments.Add new payment')}}</a>
+            </div>
+            @if(count($payments)>0)
+                <div class="col-sm-5 my-2">
+                    <form action="/payments/search" method="POST" role="search">
+                        {{ csrf_field() }}
+                        <div class="input-group">
+                            <input type="text" required class="form-control" name="q" placeholder="{{__('Search...')}}">
+                            <button type="submit" class="btn btn-default">
+                                <span class="fa fa-search"></span>
+                            </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-4 my-2 justify-content-end">
+                    {{$payments->links()}}
+                </div>
+            @endif
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        @if(count($payments)>0)
+                        <thead class="thead-dark">
+                            <tr>
+                                <th class="text-uppercase">{{__('payments.Date')}}</th>
+                                <th class="text-uppercase">{{__('payments.Athlete')}}</th>
+                                <th class="text-uppercase">{{__('payments.Amount')}}</th>
+                                <th class="text-uppercase">{{__('payments.Period')}}</th>
+                                <th class="text-uppercase">{{__('payments.Method')}}</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($payments as $payment)
+                            <tr>
+                                <td>{{date('d/m/Y', strtotime($payment->payment_date))}}</td>
+                                <td><a href="/athletes/{{$payment->athlete_id}}">{{$payment->lastname}} {{$payment->firstname}}</a></td>
+                                <td><div class="d-flex justify-content-center">@money($payment->amount)</div></td>
+                                <td>{{__($payment->period)}}</td>
+                                <td>{{__($payment->method)}}</td>
+                                <td class="d-flex justify-content-end"><a href="/payments/{{$payment->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
+                                    <a href="/athletes/{{$payment->athlete_id}}/payments" class="btn btn-warning"><span class="fa fa-euro"></span></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @else
+                            <tr><td><h2>{{__('payments.No payments yet.')}}</h2></td></tr>
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @if($payments ?? '')
+            <div class="row">
+                <div class="col-sm-8">
+                    <p></p>
+                </div>
+                <div class="col-sm-4 my-2">
+                    {{$payments->links()}}
+                </div>
+            </div>
+        @endif
+    </div>
+@endsection
+@section('footer')
+    <script>
+        $('document').ready(function () {
+            $('div.alert').fadeOut(5000);
+        });
+    </script>
+@endsection
