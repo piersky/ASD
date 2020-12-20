@@ -19,7 +19,7 @@ class RecaptchaV3Rule implements Rule
     {
         // Reference: https://codeforgeek.com/google-recaptcha-v3-tutorial/
         $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $data = ['secret' => "6LcCCdYZAAAAAJpcC9HYPGP82YZSmR4lTnOfo_Xh", 'response' => $value];
+        $data = ['secret' => config('app.secret_key'), 'response' => $value];
         $options = ['http' => [
             'header' => "Content-type: application/x-www-form-urlencoded\r\n",
             'method' => 'POST',
