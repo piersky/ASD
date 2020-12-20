@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Models\FailedLoginAttempt;
 use Illuminate\Auth\Events\Failed;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class RecordFailedLoginAttempt
 {

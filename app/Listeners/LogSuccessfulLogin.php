@@ -27,7 +27,6 @@ class LogSuccessfulLogin
      */
     public function handle(Login $event)
     {
-        //dd($event);
         $user = Auth::user();
         \Mail::to('info@engpp.com')
             ->send(new \App\Mail\LoginSuccessfullEmail($user));

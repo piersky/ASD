@@ -26,6 +26,7 @@ class NotifyAdminNewPayment
      */
     public function handle(NewPaymentCreated $event)
     {
-        dd($event);
+        \Mail::to(config('admin_email'))
+            ->send(new \App\Mail\NewPaymentEmail());
     }
 }
