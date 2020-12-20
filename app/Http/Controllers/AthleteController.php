@@ -249,8 +249,7 @@ class AthleteController extends Controller
         $group_owned = DB::table('group_compositions')
             ->where('athlete_id', '=', $id)
             ->where('year', '=', '2020')
-            ->first();
-        $group_owned->delete();
+            ->delete();
 
         $athlete = Athlete::find($id);
         $result = $athlete->delete();
