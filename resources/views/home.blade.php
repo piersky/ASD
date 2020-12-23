@@ -18,6 +18,7 @@
                             <li class="list-group-item"><a href="{{url('/payments')}}">Pagamenti</a></li>
                             <li class="list-group-item"><a href="{{url('/groups')}}">Gruppi</a></li>
                             <li class="list-group-item"><a href="#">{{__('Help')}}</a></li>
+                            <li class="list-group-item"><a href="{{url('/settings')}}">{{__('Settings')}}</a></li>
                         </ul>
                 </div>
             </div>

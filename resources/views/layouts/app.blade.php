@@ -41,6 +41,7 @@
                             <li class="nav-item btn btn-light"><a class="nav-link" href="{{url('/parents')}}">{{__('parents.Parents')}}</a></li>
                             <li class="nav-item btn btn-light"><a class="nav-link" href="{{url('/payments')}}">{{__('payments.Payments')}}</a></li>
                             <li class="nav-item btn btn-light"><a class="nav-link" href="{{url('/groups')}}">{{__('groups.Groups')}}</a></li>
+                            <li class="nav-item btn btn-light"><a class="nav-link" href="{{url('/settings')}}">{{__('Settings')}}</a></li>
                         </ul>
                     @endif
 

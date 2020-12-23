@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ParentController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\PaymentController;
@@ -60,6 +61,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/groups/component/{id}', [GroupCompositionController::class, 'destroy']);
 
     Route::get('/parents', [ParentController::class, 'index']);
+
+    Route::get('/settings', [SettingController::class, 'index']);
 });
 
 //Route::view('testMail', 'mails.testmail', ['username' => 'Pier']);
