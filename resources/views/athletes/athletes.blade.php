@@ -67,9 +67,9 @@
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';"><a href="mailto:{{$athlete->email}}">{{$athlete->email}}</a></td>
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';"><a href="/groups/{{$athlete->group_id}}/composition">{{$athlete->group_name}}</a></td>
                                 <td class="d-flex justify-content-end">
-                                    <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
+                                    <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-outline-dark mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$athlete->id}}/payments" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
-                                    <button type="button" class="btn btn-danger" data-id="{{$athlete->id}}" data-url="/athletes/{{$athlete->id}}"><span class="fa fa-trash"></span></button></td>
+                                    <button type="button" class="btn btn-outline-danger" data-id="{{$athlete->id}}" data-url="/athletes/{{$athlete->id}}"><span class="fa fa-trash"></span></button></td>
                             </tr>
                         @endforeach
                         @else
@@ -116,7 +116,7 @@
         $('document').ready(function () {
             $('div.alert').fadeOut(5000);
 
-            $('.btn.btn-danger').on('click', function (evt) {
+            $('.btn.btn-outline-danger').on('click', function (evt) {
                 evt.preventDefault();
 
                 var id = $(this).data('id');

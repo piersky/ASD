@@ -23,6 +23,12 @@
             <div class="col-sm-4 my-3">
                 <a href="{{route('groups.composition.add', ['id' => $group->id])}}" class="btn btn-primary text-uppercase">{{__('group_compositions.Add component to group')}}</a>
             </div>
+            <div class="col-sm-5">
+                <p></p>
+            </div>
+            <div class="col-sm-1 my-3">
+                <a href="/groups/{{$group->id}}/pdf" class="btn btn-danger mr-1 d-flex align-content-end">PDF</a>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-10">
@@ -41,7 +47,7 @@
                                 <td><a href="/athletes/{{$groupcomponent->athlete_id}}">{{$groupcomponent->lastname}} {{$groupcomponent->firstname}}</a></td>
                                 <td class="d-flex justify-content-end">
                                     <a href="/athletes/{{$groupcomponent->athlete_id}}/payments" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
-                                    <button type="button" class="btn btn-danger" data-id="{{$groupcomponent->id}}" data-url="/groups/component/{{$groupcomponent->id}}"><span class="fa fa-trash"></span></button>
+                                    <button type="button" class="btn btn-danger delete" data-id="{{$groupcomponent->id}}" data-url="/groups/component/{{$groupcomponent->id}}"><span class="fa fa-trash"></span></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -79,7 +85,7 @@
         $('document').ready(function () {
             $('div.alert').fadeOut(5000);
 
-            $('.btn.btn-danger').on('click', function (evt) {
+            $('.btn.btn-danger.delete').on('click', function (evt) {
                 evt.preventDefault();
 
                 var id = $(this).data('id');

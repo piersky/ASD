@@ -3,6 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="col-sm-2">
+                @if($athlete->photo ?? '')
+                    <img src="{{asset($athlete->path)}}" width="100px">
+                @endif
+            </div>
             <div class="col-sm-6">
                 <h1 class="text-uppercase">{{$athlete->lastname}} {{$athlete->firstname}}</h1>
                 <h2>{{__('athletes.Group:')}} {{count($group)>0?$group[0]->name:""}}</h2>
@@ -11,18 +16,12 @@
                 <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-success"><span class="fa fa-pencil-alt"></span></a>
                 <a href="/athletes/{{$athlete->id}}/payments" class="btn btn-warning"><span class="fa fa-euro"></span></a>
             </div>
-            <div class="col-sm-4">
-                <img src="{{asset($athlete->photo)}}">
-            </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-sm-12">
                 <div class="row">
-                    <div class="form-group col-1">
-                        <label for="">{{__('athletes.Is active')}}</label>
-                        <input type="checkbox" readonly name="is_active" id="is_active" class="form-control" {{$athlete->is_active==1?"checked":""}}>
-                    </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-5">
                         <label for="firstname">{{__('athletes.First Name')}}</label>
                         <input type="text" readonly name="firstname" id="firstname" class="form-control" value="{{old('firstname', $athlete->firstname)}}">
                     </div>
@@ -105,6 +104,12 @@
                     <div class="form-group col-6">
                         <label for="society_come_from"><strong>{{__('athletes.Name of the society')}}</strong></label>
                         <input type="text" readonly name="society_come_from" id="society_come_from" class="form-control" value="{{$athlete->society_come_from}}" placeholder="{{__('athletes.The name of the society')}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-1">
+                        <label for="">{{__('athletes.Is active')}}</label>
+                        <input type="checkbox" readonly name="is_active" id="is_active" class="form-control" {{$athlete->is_active==1?"checked":""}}>
                     </div>
                 </div>
             </div>

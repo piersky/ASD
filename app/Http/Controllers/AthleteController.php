@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Athlete;
 use Illuminate\Support\Facades\DB;
 use Auth;
-use function PHPUnit\Framework\isEmpty;
+
 
 class AthleteController extends Controller
 {
@@ -106,6 +106,7 @@ class AthleteController extends Controller
         $request->validate([
             'firstname'=>'required',
             'lastname'=>'required',
+            'photo' => 'mimes:jpg,jpeg,png,gif,pdf|max:2048'
         ]);
 
         $athlete = new Athlete([
@@ -192,7 +193,27 @@ class AthleteController extends Controller
     {
         $athlete = Athlete::find($id);
 
-        return view('athletes.editathlete', ['athlete' => $athlete]);
+        $group = DB::table('groups')
+            ->join('group_compositions', 'groups.id', '=', 'group_compositions.group_id')
+            ->leftJoin('group_translations', 'group_translations.group_id', '=', 'groups.id')
+            ->where('group_compositions.athlete_id', '=', $id)
+            //TODO: use settings instead
+            ->where('group_translations.lang_id', '=', 'it')
+            ->get();
+
+        $groups = DB::table('groups AS g')
+            ->leftJoin('group_translations AS gt', 'gt.group_id', '=', 'g.id')
+            ->select('g.id', 'gt.name')
+            ->where('g.is_active', '=', 1)
+            //TODO: Use settings instead
+            ->where('gt.lang_id', '=', 'it')
+            ->get();
+
+        return view('athletes.editathlete', [
+            'athlete' => $athlete,
+            'group' => $group,
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -204,6 +225,12 @@ class AthleteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'firstname'=>'required',
+            'lastname'=>'required',
+            'photo' => 'mimes:jpg,jpeg,png,gif,pdf|max:2048'
+        ]);
+
         $athlete = Athlete::find($id);
 
         $athlete->firstname = $request->get('firstname');
@@ -227,6 +254,22 @@ class AthleteController extends Controller
         $athlete->begin_with_us_at = $request->get('begin_with_us_at');
         $athlete->end_with_us_at = $request->get('end_with_us_at');
         $athlete->society_come_from = $request->get('society_come_from');
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            if(!$file->isValid()){
+                return false;
+            }
+            //Delete old photo if exists
+            if ($athlete->photo != null) {
+                $photo = $athlete->photo;
+                if ($photo && \Storage::exists($photo)) {
+                    \Storage::delete($photo);
+                }
+            }
+            $fileName = $file->store(env('PHOTO_DIR', 'public'));
+            $athlete->photo = $fileName;
+        }
 
         $res = $athlete->save();
 
@@ -252,7 +295,13 @@ class AthleteController extends Controller
             ->delete();
 
         $athlete = Athlete::find($id);
+        $photo = $athlete->photo;
+
         $result = $athlete->delete();
+
+        if ($result && $photo && \Storage::exists($photo)) {
+            \Storage::delete($photo);
+        }
 
         if (request()->ajax()) return '' . $result;
         else return redirect()->back();
@@ -298,7 +347,7 @@ class AthleteController extends Controller
                 'athletes.phone',
                 'athletes.email',
                 'athletes.fiscal_code',
-                'group_translations.name as group_name',
+                'group_translations.name AS group_name',
                 'athletes.id'
             )
             ->where('athletes.id', '=', $id);

@@ -119,8 +119,8 @@
                             <input type="checkbox" name="is_active" id="is_active" class="form-control" checked>
                         </div>
                         <div class="form-group col-7">
-                            <label for="photo">Photo</label>
-                            <input type="file" name="photo" id="photo" class="form-control">
+                            <label for="photo">{{__('athletes.Photo')}}</label>
+                            <input type="file" name="photo" id="photo" class="form-control-file">
                         </div>
                     </div>
 

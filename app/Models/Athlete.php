@@ -38,4 +38,14 @@ class Athlete extends Model
         'society_come_from',
         'deleted_at'
         ];
+
+    public function getPathAttribute(){
+        /*if (stristr($this->photo, 'http') === false) {
+            $url = 'storage/app/'.$this->photo;
+        }*/
+
+        $url = 'storage/'.$this->photo;
+
+        return $url;
+    }
 }

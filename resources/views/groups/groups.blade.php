@@ -44,11 +44,11 @@
                                 <td>{{$group->name}}</td>
                                 <td class="text-center">{{$group->total}}</td>
                                 <td class="d-flex justify-content-end">
-                                    <a href="/groups/{{$group->id}}/pdf" class="btn btn-light mr-1"><span class="fa fa-file-pdf-o"></span></a>
+                                    <a href="/groups/{{$group->id}}/pdf" class="btn btn-danger mr-1"><span class="fa fa-file-pdf-o"></span></a>
                                     <a href="/groups/{{$group->id}}/edit" class="btn btn-light"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="{{route('groups.composition.components', $group->id)}}" class="btn btn-success mx-1"><span class="fa fa-users"></span></a>
                                     <a href="{{route('groups.payments', $group->id)}}" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
-                                    <button type="button" class="btn btn-danger" data-id="{{$group->id}}" data-url="/groups/{{$group->id}}"><span class="fa fa-trash"></span></button>
+                                    <button type="button" class="btn btn-outline-danger" data-id="{{$group->id}}" data-url="/groups/{{$group->id}}"><span class="fa fa-trash"></span></button>
                             </tr>
                         @endforeach
                         @else
@@ -86,7 +86,7 @@
         $('document').ready(function () {
             $('div.alert').fadeOut(5000);
 
-            $('.btn.btn-danger').on('click', function (evt) {
+            $('.btn.btn-outline-danger').on('click', function (evt) {
                 evt.preventDefault();
 
                 var id = $(this).data('id');

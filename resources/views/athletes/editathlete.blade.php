@@ -2,22 +2,25 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row mb-2">
+            <div class="col-sm-2">
+                @if($athlete->photo ?? '')
+                    <img src="{{asset($athlete->path)}}" width="100px">
+                @endif
+            </div>
             <div class="col-sm-10">
                 <h1 class="text-uppercase">{{$athlete->lastname}} {{$athlete->firstname}}</h1>
+                <h2>{{__('athletes.Group:')}} {{count($group)>0?$group[0]->name:""}}</h2>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-sm-12">
                 <form action="{{route('athletes.update', ['id' => $athlete->id])}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     @method('PATCH')
                     <div class="row">
-                        <div class="form-group col-1">
-                            <label for="is_active"><strong>{{__('athletes.Is active')}}</strong></label>
-                            <input type="checkbox" name="is_active" id="is_active" class="form-control" {{$athlete->is_active?"checked":""}}>
-                        </div>
-                        <div class="form-group col-sm-4">
+                        <div class="form-group col-sm-5">
                             <label for="firstname"><strong>{{__('athletes.First Name')}}*</strong></label>
                             <input type="text" required name="firstname" id="firstname" class="form-control" value="{{$athlete->firstname}}">
                         </div>
@@ -103,6 +106,16 @@
                         <div class="form-group col-6">
                             <label for="society_come_from"><strong>{{__('athletes.Name of the society')}}</strong></label>
                             <input type="text" name="society_come_from" id="society_come_from" class="form-control" value="{{$athlete->society_come_from}}" placeholder="{{__('athletes.The name of the society')}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-1">
+                            <label for="is_active"><strong>{{__('athletes.Is active')}}</strong></label>
+                            <input type="checkbox" name="is_active" id="is_active" class="form-control" {{$athlete->is_active?"checked":""}}>
+                        </div>
+                        <div class="form-group col-7">
+                            <label for="photo">{{__('athletes.Photo')}}</label>
+                            <input type="file" name="photo" id="photo" class="form-control-file">
                         </div>
                     </div>
 
