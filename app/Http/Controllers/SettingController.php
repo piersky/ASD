@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\DB;
 
 class SettingController extends Controller
 {
@@ -57,9 +59,20 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        $sets = DB::table('settings')
+            ->get();
+
+        $keys = [];
+
+        foreach ($sets as $set){
+            $keys[$set->key] = $set->value;
+        }
+
+        $user_id = Auth::user()->id;
+
+        return view('settings.edit', ['keys' => $keys, 'user_id' => $user_id]);
     }
 
     /**
@@ -69,7 +82,7 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
     }

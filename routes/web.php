@@ -62,7 +62,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/parents', [ParentController::class, 'index']);
 
-    Route::get('/settings', [SettingController::class, 'index']);
+    Route::get('/settings', [SettingController::class, 'edit']);
+    Route::patch('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
 
 //Route::view('testMail', 'mails.testmail', ['username' => 'Pier']);
