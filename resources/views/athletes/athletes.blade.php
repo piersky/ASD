@@ -69,7 +69,9 @@
                                 <td class="d-flex justify-content-end">
                                     <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-outline-dark mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$athlete->id}}/payments" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
-                                    <button type="button" class="btn btn-outline-danger" data-id="{{$athlete->id}}" data-url="/athletes/{{$athlete->id}}"><span class="fa fa-trash"></span></button></td>
+                                    @can('isAdmin')
+                                        <button type="button" class="btn btn-outline-danger" data-id="{{$athlete->id}}" data-url="/athletes/{{$athlete->id}}"><span class="fa fa-trash"></span></button></td>
+                                    @endcan
                             </tr>
                         @endforeach
                         @else

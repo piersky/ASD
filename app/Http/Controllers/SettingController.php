@@ -53,14 +53,7 @@ class SettingController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
+    private function getKeys(){
         $sets = DB::table('settings')
             ->get();
 
@@ -69,6 +62,19 @@ class SettingController extends Controller
         foreach ($sets as $set){
             $keys[$set->key] = $set->value;
         }
+
+        return $keys;
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
+        $keys = $this->getKeys();
 
         $user_id = Auth::user()->id;
 
@@ -84,7 +90,25 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $keys = $this->getKeys();
+
+        if ($request->year != $keys['year']) {
+            $keys['year'] = $request->year;
+        }
+
+        if ($request->lang_id != $keys['lang_id']) {
+            $keys['lang_id'] = $request->lang_id;
+        }
+
+        if ($request->payment_day_month != $keys['payment_day_month']) {
+            $keys['payment_day_month'] = $request->payment_day_month;
+        }
+
+        if ($request->send_email_on_new_payment != $keys['send_email_on_new_payment']) {
+            $keys['send_email_on_new_payment'] = $request->send_email_on_new_payment;
+        }
+
+        return redirect('/settings')->with('message', 'Settings updated');
     }
 
     /**

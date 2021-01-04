@@ -64,6 +64,7 @@
                 </div>
             </div>
         </nav>
+
         @if(Gate::check('isManager') || Gate::check('isAdmin'))
             <main class="py-4">
                 @yield('content')

@@ -7,7 +7,7 @@
                 <h1 class="text-uppercase">{{$group->name}}</h1>
             </div>
             <div class="col-sm-4 d-flex justify-content-end mb-4">
-                <a class="btn btn-primary" href="/groups/{{$group->id}}/paymentsPDF">PDF</a>
+                <a class="btn btn-danger" href="/groups/{{$group->id}}/paymentsPDF">PDF</a>
             </div>
         </div>
         <div class="row">

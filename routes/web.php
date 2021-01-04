@@ -66,11 +66,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::patch('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
 
-//Route::view('testMail', 'mails.testmail', ['username' => 'Pier']);
-Route::get('testEmail', function(){
-    Illuminate\Support\Facades\Mail::to('papeschi@gmail.com')->send(new App\Mail\TestEmail(Auth::user()));
-});
-
 //Route::get('/athletes', [AthleteController::class, 'index'])->middleware('auth');
 /*Route::get('/athletes', function() {
     return Athlete::all();

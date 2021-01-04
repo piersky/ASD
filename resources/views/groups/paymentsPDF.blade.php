@@ -10,8 +10,8 @@
     </style>
 </head>
 <body>
-    <img src="{{asset('logo.png')}}" style="width: 150px;">
-    <h5 class="text-uppercase">{{$group_name}}</h5>
+    <img src="{{asset('logo.png')}}" style="width: 150px; padding-left: 500px;">
+    <h5 class="text-uppercase text-center">{{$group_name}}</h5>
     <div class="table-responsive">
         <table class="table table-striped mx-auto w-auto">
             <thead class="thead-dark">

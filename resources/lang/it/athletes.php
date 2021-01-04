@@ -37,5 +37,6 @@ return [
     'End with us' => 'Ha terminato con noi',
     'Name of the society' => 'Società di provenienza',
     'The name of the society' => 'Nome della società',
-    'Photo' => 'Foto'
+    'Photo' => 'Foto',
+    'Birth' => 'Nascita'
 ];
