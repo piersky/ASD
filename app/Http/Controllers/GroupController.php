@@ -304,7 +304,8 @@ class GroupController extends Controller
                                 $period_payments[$k] = [
                                     'amount' => $payments[$j]->amount,
                                     'date' => $payments[$j]->payment_date,
-                                    'id' => $payments[$j]->id
+                                    'id' => $payments[$j]->id,
+                                    'method' => $payments[$j]->method
                                 ];
                                 $total += floatval($payments[$j]->amount);
                                 $j++;

@@ -27,7 +27,7 @@
             <div class="col-sm-3 my-2">
                 <a href="{{route('payments.create')}}" class="btn btn-primary text-uppercase">{{__('payments.Add new payment')}}</a>
             </div>
-            @if(count($payments)>0)
+            @if($payments ?? '')
                 <div class="col-sm-5 my-2">
                     <form action="/payments/search" method="POST" role="search">
                         {{ csrf_field() }}
@@ -49,7 +49,7 @@
             <div class="col-sm-12">
                 <div class="table-responsive">
                     <table class="table table-striped">
-                        @if(count($payments)>0)
+                        @if($payments ?? '')
                         <thead class="thead-dark">
                             <tr>
                                 <th class="text-uppercase">{{__('payments.Date')}}</th>
@@ -57,6 +57,7 @@
                                 <th class="text-uppercase">{{__('payments.Amount')}}</th>
                                 <th class="text-uppercase">{{__('payments.Period')}}</th>
                                 <th class="text-uppercase">{{__('payments.Method')}}</th>
+                                <th class="text-uppercase">{{__('payments.Note')}}</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -68,6 +69,7 @@
                                 <td><div class="d-flex justify-content-center">@money($payment->amount)</div></td>
                                 <td>{{__($payment->period)}}</td>
                                 <td>{{__($payment->method)}}</td>
+                                <td style="width: 10%">{{$payment->note}}</td>
                                 <td class="d-flex justify-content-end"><a href="/payments/{{$payment->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$payment->athlete_id}}/payments" class="btn btn-warning"><span class="fa fa-euro"></span></a>
                                 </td>

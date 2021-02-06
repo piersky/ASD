@@ -19,16 +19,12 @@ class PaymentController extends Controller
         $payments = DB::table('payments')
             ->join('athletes', 'payments.athlete_id', '=', 'athletes.id')
             ->select(
-                'payments.id',
-                'payments.payment_date',
-                'athletes.lastname',
-                'athletes.firstname',
+                'payments.*',
                 'athletes.id AS athlete_id',
-                'payments.amount',
-                'payments.period',
-                'payments.method'
+                'athletes.firstname',
+                'athletes.lastname'
             )
-            ->orderByDesc('payment_date')
+            ->orderByDesc('payments.payment_date')
             //TODO: change the year with settings
             ->where('payments.year', '=', '2020')
             ->paginate(50);

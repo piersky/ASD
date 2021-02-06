@@ -29,6 +29,7 @@ class LogSuccessfulLogin
     {
         $user = Auth::user();
         \Mail::to('info@engpp.com')
-            ->send(new \App\Mail\LoginSuccessfullEmail($user->email));
+            ->send(new \App\Mail\LoginSuccessfullEmail($user));
+            //->subject($user->name.' logged in.');
     }
 }

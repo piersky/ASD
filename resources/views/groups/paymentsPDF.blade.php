@@ -36,9 +36,30 @@
             <tbody>
             @foreach($athletes as $athlete)
                 <tr class="small">
-                    <td>{{$athlete->lastname}} {{$athlete->firstname}}</td>
+                    <td class="border-dark" style="border: 1px solid black">{{$athlete->lastname}} {{$athlete->firstname}}</td>
                     @foreach($athlete->period_payments as $period_payment)
-                        <td class="alert alert-{{$period_payment['amount']==0?"danger":"success"}}">
+                        @if($period_payment['amount']!=0)
+                            @switch($period_payment['method'])
+                                @case('CASH')
+                                @php $class = "alert-success"; @endphp
+                                @break
+                                @case('BANK WIRE')
+                                @php $class = "alert-warning"; @endphp
+                                @break
+                                @case('CHECK')
+                                @php $class = "alert-primary"; @endphp
+                                @break
+                                @case('POS')
+                                @php $class = "alert-secondary"; @endphp
+                                @break
+                                @case('OTHER')
+                                @php $class = ""; @endphp
+                                @break
+                            @endswitch
+                        @else
+                            @php $class="alert-danger"; @endphp
+                        @endif
+                        <td class="{{$class}}" style="border: 1px solid black">
                             <div class="d-flex justify-content-end">
                                 @if($period_payment['amount']>0)
                                     @money($period_payment['amount'])
@@ -51,7 +72,7 @@
                             </div>
                         </td>
                     @endforeach
-                    <td><div class="d-flex justify-content-end">@money($athlete->total)</div></td>
+                    <td style="border: 1px solid black"><div class="d-flex justify-content-end">@money($athlete->total)</div></td>
                 </tr>
             @endforeach
             </tbody>

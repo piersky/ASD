@@ -57,37 +57,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header bg-success">
-                            <h3 class="d-flex justify-content-between align-items-center text-uppercase text-white">
-                                {{__('Groups')}}
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">{{__('Number of groups')}}</p>
-                            <p class="card-text">1</p>
-                            <a href="{{url('/groups')}}" class="btn btn-primary text-uppercase">{{__('Go to Groups')}}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="d-flex justify-content-between align-items-center text-uppercase">
-
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text"></p>
-                            <h1></h1>
-                            <a href="#" class="btn btn-primary text-uppercase"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             @endif
 
         </div>

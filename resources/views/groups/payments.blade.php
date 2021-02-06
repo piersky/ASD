@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <div class="table-responsive">
+                <div class="table-responsive table-hover table-bordered border-dark">
                     <table class="table table-striped">
                         <thead class="thead-dark">
                         <tr>
@@ -36,22 +36,43 @@
                         <tbody>
                         @foreach($athletes as $athlete)
                             <tr>
-                                <th scope="row" class="text-uppercase"><a href="/athletes/{{$athlete->athlete_id}}">{{$athlete->lastname}} {{$athlete->firstname}}</a></th>
+                                <th scope="row" class="text-uppercase border-dark"><a href="/athletes/{{$athlete->athlete_id}}">{{$athlete->lastname}} {{$athlete->firstname}}</a></th>
                                 @foreach($athlete->period_payments as $period_payment)
-                                    <td class="alert alert-{{$period_payment['amount']==0?"danger":"success"}}">
-                                        <div class="d-flex justify-content-end">
-                                            @if($period_payment['amount']>0)
-                                                <a href="/payments/{{$period_payment['id']}}">@money($period_payment['amount'])</a>
-                                            @endif
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-                                            @if($period_payment['amount']>0)
-                                                <a href="/payments/{{$period_payment['id']}}">{{date('d/m/Y', strtotime($period_payment['date']))}}</a>
-                                            @endif
-                                        </div>
-                                    </td>
+                                    @if($period_payment['amount']!=0)
+                                        @switch($period_payment['method'])
+                                            @case('CASH')
+                                                @php $class = "alert-success"; @endphp
+                                                @break
+                                            @case('BANK WIRE')
+                                                @php $class = "alert-warning"; @endphp
+                                                @break
+                                            @case('CHECK')
+                                                @php $class = "alert-primary"; @endphp
+                                                @break
+                                            @case('POS')
+                                                @php $class = "alert-secondary"; @endphp
+                                                @break
+                                            @case('OTHER')
+                                                @php $class = ""; @endphp
+                                                @break
+                                        @endswitch
+                                    @else
+                                        @php $class="alert-danger"; @endphp
+                                    @endif
+                                        <td class="border-dark {{$class}}">
+                                            <div class="d-flex justify-content-end">
+                                                @if($period_payment['amount']>0)
+                                                    <a href="/payments/{{$period_payment['id']}}">@money($period_payment['amount'])</a>
+                                                @endif
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                @if($period_payment['amount']>0)
+                                                    <a href="/payments/{{$period_payment['id']}}">{{date('d/m/Y', strtotime($period_payment['date']))}}</a>
+                                                @endif
+                                            </div>
+                                        </td>
                                 @endforeach
-                                <td><div class="d-flex justify-content-end">@money($athlete->total)</div></td>
+                                <td class="border-dark"><div class="d-flex justify-content-end">@money($athlete->total)</div></td>
                             </tr>
                         @endforeach
                         </tbody>
