@@ -171,9 +171,11 @@ class AthleteController extends Controller
     {
         $athlete = Athlete::find($id);
 
-        $group = DB::table('groups')
-            ->join('group_compositions', 'groups.id', '=', 'group_compositions.group_id')
-            ->leftJoin('group_translations', 'group_translations.group_id', '=', 'groups.id')
+        $group = DB::table('groups AS g')
+            ->join('group_compositions', 'g.id', '=', 'group_compositions.group_id')
+            ->leftJoin('group_translations', 'group_translations.group_id', '=', 'g.id')
+            ->select('g.*',
+                'group_translations.name')
             ->where('group_compositions.athlete_id', '=', $id)
             //TODO: use settings instead
             ->where('group_translations.lang_id', '=', 'it')

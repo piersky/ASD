@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::patch('/payments/{id}', [PaymentController::class, 'update'])->name('payments.update');
     Route::post('/payments/search', [PaymentController::class, 'search']);
     Route::get('/payments/{id}', [PaymentController::class, 'show'])->name('payments.show');
+    Route::get('payments/{id}/duplicate', [PaymentController::class, 'duplicate'])->name('payments.duplicate');
 
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.creategroup');

@@ -26,6 +26,9 @@
         <div class="row">
             <div class="col-sm-3 my-2">
                 <a href="{{route('payments.create')}}" class="btn btn-primary text-uppercase">{{__('payments.Add new payment')}}</a>
+                @if($athlete_id ?? '')
+                    <a href="{{route('payments.duplicate', ['id' => $athlete_id])}}" class="btn btn-warning text-uppercase"><span class="fa fa-copy"></span></a>
+                @endif
             </div>
             @if($payments ?? '')
                 <div class="col-sm-5 my-2">
@@ -64,12 +67,12 @@
                         <tbody>
                         @foreach($payments as $payment)
                             <tr>
-                                <td>{{date('d/m/Y', strtotime($payment->payment_date))}}</td>
+                                <td onclick="location.href='/payments/{{$payment->id}}';">{{date('d/m/Y', strtotime($payment->payment_date))}}</td>
                                 <td><a href="/athletes/{{$payment->athlete_id}}">{{$payment->lastname}} {{$payment->firstname}}</a></td>
-                                <td><div class="d-flex justify-content-center">@money($payment->amount)</div></td>
-                                <td>{{__($payment->period)}}</td>
-                                <td>{{__($payment->method)}}</td>
-                                <td style="width: 10%">{{$payment->note}}</td>
+                                <td onclick="location.href='/payments/{{$payment->id}}';"><div class="d-flex justify-content-center">@money($payment->amount)</div></td>
+                                <td onclick="location.href='/payments/{{$payment->id}}';">{{__($payment->period)}}</td>
+                                <td onclick="location.href='/payments/{{$payment->id}}';">{{__($payment->method)}}</td>
+                                <td style="width: 10%" onclick="location.href='/payments/{{$payment->id}}';">{{$payment->note}}</td>
                                 <td class="d-flex justify-content-end"><a href="/payments/{{$payment->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$payment->athlete_id}}/payments" class="btn btn-warning"><span class="fa fa-euro"></span></a>
                                 </td>

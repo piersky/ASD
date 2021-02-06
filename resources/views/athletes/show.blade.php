@@ -10,7 +10,7 @@
             </div>
             <div class="col-sm-6">
                 <h1 class="text-uppercase">{{$athlete->lastname}} {{$athlete->firstname}}</h1>
-                <h2>{{__('athletes.Group:')}} {{count($group)>0?$group[0]->name:""}}</h2>
+                <h2>{{__('athletes.Group:')}} {{count($group)>0?$group[0]->name:""}} <a href="{{route('groups.composition.components', $group[0]->id)}}"><span class="fa fa-arrow-right"></span></a></h2>
             </div>
             <div class="col-sm-2">
                 <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-success"><span class="fa fa-pencil-alt"></span></a>
@@ -22,12 +22,12 @@
             <div class="col-sm-12">
                 <div class="row">
                     <div class="form-group col-sm-5">
-                        <label for="firstname">{{__('athletes.First Name')}}</label>
-                        <input type="text" readonly name="firstname" id="firstname" class="form-control" value="{{old('firstname', $athlete->firstname)}}">
-                    </div>
-                    <div class="form-group col-sm-5">
                         <label for="">{{__('athletes.Last Name')}}</label>
                         <input type="text" readonly name="lastname" id="lastname" class="form-control" value="{{old('lastname', $athlete->lastname)}}">
+                    </div>
+                    <div class="form-group col-sm-5">
+                        <label for="firstname">{{__('athletes.First Name')}}</label>
+                        <input type="text" readonly name="firstname" id="firstname" class="form-control" value="{{old('firstname', $athlete->firstname)}}">
                     </div>
                     <div class="form-group col-sm-2">
                         <label for="gender">{{__('athletes.Gender')}}</label>

@@ -3,8 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-9">
                 <h1 class="text-uppercase">{{$group->name}}</h1>
+            </div>
+            <div class="col-sm-1">
+                <a href="/groups/{{$group->id}}/edit" class="btn btn-success"><span class="fa fa-pencil-alt"></span></a>
             </div>
             @if(session()->has('message'))
                 @component('components.alert-info')

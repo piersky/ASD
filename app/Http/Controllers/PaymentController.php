@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Athlete;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,13 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = DB::table('payments')
+        $payments = $this->getPayments();
+
+        return view('payments.payments', ['payments' => $payments]);
+    }
+
+    private function getPayments(){
+        return DB::table('payments')
             ->join('athletes', 'payments.athlete_id', '=', 'athletes.id')
             ->select(
                 'payments.*',
@@ -28,8 +35,6 @@ class PaymentController extends Controller
             //TODO: change the year with settings
             ->where('payments.year', '=', '2020')
             ->paginate(50);
-
-        return view('payments.payments', ['payments' => $payments]);
     }
 
     /**
@@ -47,7 +52,27 @@ class PaymentController extends Controller
 
         $payment = new Payment();
 
-        return view('payments.createpayment', ['athletes' => $athletes, 'payment' => $payment]);
+        return view('payments.createpayment', [
+            'athletes' => $athletes,
+            'payment' => $payment]);
+    }
+
+    public function duplicate($id) {
+        $athletes = DB::table('athletes')
+            ->where('is_active','=', '1')
+            ->orderBy('lastname')
+            ->orderBy('firstname')
+            ->get();
+
+        $payment = new Payment();
+
+        $athlete_old = Athlete::find($id);
+
+        return view('payments.createpayment', [
+            'athletes' => $athletes,
+            'payment' => $payment,
+            'athlete_old' => $athlete_old
+        ]);
     }
 
     /**
@@ -88,7 +113,10 @@ class PaymentController extends Controller
 
         if (count($exists_payment_period) == 0) {
             $payment->save();
-            return redirect('/payments')->with('success', 'Payment saved');
+            return view('payments.payments', [
+                'payments' => $this->getPayments(),
+                'athlete_id' => $request->get('athlete_id')
+            ])->with('success', 'Payment saved');
         } else {
             return redirect('/payments')->with('error', 'Pagamento già presente per il periodo e l\'atleta');
         }

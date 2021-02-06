@@ -20,7 +20,11 @@
                             <label for="athlete_id"><strong>{{__('payments.Athlete')}}*</strong></label>
                             <select id="athlete_id" name="athlete_id" class="form-control">
                                 @foreach($athletes as $athlete)
-                                    <option value="{{$athlete->id}}">{{$athlete->lastname}} {{$athlete->firstname}}</option>
+                                    @if($athlete_old ?? '')
+                                        <option value="{{$athlete->id}}" {{$athlete->id==$athlete_old->id?"selected":""}}>{{$athlete->lastname}} {{$athlete->firstname}}</option>
+                                    @else
+                                        <option value="{{$athlete->id}}">{{$athlete->lastname}} {{$athlete->firstname}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -28,7 +32,11 @@
                     <div class="row">
                         <div class="form-group col-sm-4">
                             <label for="amount"><strong>{{__('payments.Amount')}}*</strong></label>
-                            <input type="number" step="0.01" required name="amount" id="amount" class="form-control" value="{{old('amount')}}" placeholder={{__('payments.Payment amount')}}>
+                            @if($athlete_old ?? '')
+                                <input type="number" step="0.01" required name="amount" id="amount" class="form-control" value="{{$athlete_old->amount}}" placeholder={{__('payments.Payment amount')}}>
+                            @else
+                                <input type="number" step="0.01" required name="amount" id="amount" class="form-control" value="{{old('amount')}}" placeholder={{__('payments.Payment amount')}}>
+                            @endif
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="period"><strong>{{__('payments.Period')}}*</strong></label>
@@ -60,7 +68,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="note"><strong>{{__('payments.Notes')}}*</strong></label>
+                        <label for="note"><strong>{{__('payments.Notes')}}</strong></label>
                         <input type="text" name="note" id="note" class="form-control" value="{{old('note')}}" placeholder={{__('payments.Notes')}}>
                     </div>
                     <a href="/payments" class="btn btn-danger">{{__('Cancel')}}</a>

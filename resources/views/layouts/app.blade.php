@@ -74,7 +74,7 @@
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
                 @yield('footer')
-                <small>&copy; 2020 Pier Luigi Papeschi - V. 0.1 - <a href="https://pierluigipapeschi.com">www.pierluigipapeschi.com</a></small>
+                <small>&copy; 2021 Pier Luigi Papeschi - V. 0.1 - <a href="https://pierluigipapeschi.com">www.pierluigipapeschi.com</a></small>
             </footer>
         @endif
     </div>

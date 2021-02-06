@@ -29,7 +29,7 @@
                     {{ __('Forgot Your Password?') }}
                 </a></form>
         @endif
-        <p class="my-3 text-muted">&copy; 2020 <a href="https://pierluigipapeschi.com">Pier Luigi Papeschi</a></p>
+        <p class="my-3 text-muted">&copy; 2021 <a href="https://pierluigipapeschi.com">Pier Luigi Papeschi</a></p>
         </form>
     </div>
     <script src="https://www.google.com/recaptcha/api.js?render={{config('app.site_key')}}"></script>
