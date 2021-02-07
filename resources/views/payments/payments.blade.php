@@ -26,8 +26,8 @@
         <div class="row">
             <div class="col-sm-3 my-2">
                 <a href="{{route('payments.create')}}" class="btn btn-primary text-uppercase">{{__('payments.Add new payment')}}</a>
-                @if($athlete_id ?? '')
-                    <a href="{{route('payments.duplicate', ['id' => $athlete_id])}}" class="btn btn-warning text-uppercase"><span class="fa fa-copy"></span></a>
+                @if($payment_old ?? '')
+                    <a href="{{route('payments.duplicate', ['id' => $payment_old])}}" class="btn btn-warning text-uppercase"><span class="fa fa-copy"></span></a>
                 @endif
             </div>
             @if($payments ?? '')

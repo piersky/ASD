@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Athlete;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -66,12 +65,12 @@ class PaymentController extends Controller
 
         $payment = new Payment();
 
-        $athlete_old = Athlete::find($id);
+        $payment_old = Payment::find($id);
 
         return view('payments.createpayment', [
             'athletes' => $athletes,
             'payment' => $payment,
-            'athlete_old' => $athlete_old
+            'payment_old' => $payment_old
         ]);
     }
 
@@ -115,7 +114,7 @@ class PaymentController extends Controller
             $payment->save();
             return view('payments.payments', [
                 'payments' => $this->getPayments(),
-                'athlete_id' => $request->get('athlete_id')
+                'payment_old' => $payment->id
             ])->with('success', 'Payment saved');
         } else {
             return redirect('/payments')->with('error', 'Pagamento già presente per il periodo e l\'atleta');

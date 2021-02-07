@@ -30,7 +30,7 @@ class HomeController extends Controller
                 'amount',
                 'athletes.firstname',
                 'athletes.lastname')
-            ->orderByDesc('payment_date')
+            ->orderByDesc('payments.created_at')
             ->limit(1)
             ->get();
 
