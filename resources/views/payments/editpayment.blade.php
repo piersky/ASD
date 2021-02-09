@@ -43,19 +43,19 @@
                         <div class="form-group col-sm-4">
                             <label for="period"><strong>{{__('payments.Period')}}*</strong></label>
                             <select id="period" name="period" class="form-control">
-                                <option value="Enrollment" {{$payment->pariod=="Enrollment"?"selected":""}}>{{__('payments.Enrollment')}}</option>
-                                <option value="1st_fee" {{$payment->pariod=="1st_fee"?"selected":""}}>{{__('payments.1st_fee')}}</option>
-                                <option value="2nd_fee" {{$payment->pariod=="2nd_fee"?"selected":""}}>{{__('payments.2nd_fee')}}</option>
-                                <option value="3rd_fee" {{$payment->pariod=="3rd_fee"?"selected":""}}>{{__('payments.3rd_fee')}}</option>
-                                <option value="4th_fee" {{$payment->pariod=="4th_fee"?"selected":""}}>{{__('payments.4th_fee')}}</option>
-                                <option value="5th_fee" {{$payment->pariod=="5th_fee"?"selected":""}}>{{__('payments.5th_fee')}}</option>
-                                <option value="6th_fee" {{$payment->pariod=="6th_fee"?"selected":""}}>{{__('payments.6th_fee')}}</option>
-                                <option value="7th_fee" {{$payment->pariod=="7th_fee"?"selected":""}}>{{__('payments.7th_fee')}}</option>
-                                <option value="8th_fee" {{$payment->pariod=="8th_fee"?"selected":""}}>{{__('payments.8th_fee')}}</option>
-                                <option value="9th_fee" {{$payment->pariod=="9th_fee"?"selected":""}}>{{__('payments.9th_fee')}}</option>
-                                <option value="10th_fee" {{$payment->pariod=="10th_fee"?"selected":""}}>{{__('payments.10th_fee')}}</option>
-                                <option value="11th_fee" {{$payment->pariod=="11th_fee"?"selected":""}}>{{__('payments.11th_fee')}}</option>
-                                <option value="12th_fee" {{$payment->pariod=="12th_fee"?"selected":""}}>{{__('payments.12th_fee')}}</option>
+                                <option value="Enrollment" {{$payment->period=="Enrollment"?"selected":""}}>{{__('payments.Enrollment')}}</option>
+                                <option value="1st_fee" {{$payment->period=="1st_fee"?"selected":""}}>{{__('payments.1st_fee')}}</option>
+                                <option value="2nd_fee" {{$payment->period=="2nd_fee"?"selected":""}}>{{__('payments.2nd_fee')}}</option>
+                                <option value="3rd_fee" {{$payment->period=="3rd_fee"?"selected":""}}>{{__('payments.3rd_fee')}}</option>
+                                <option value="4th_fee" {{$payment->period=="4th_fee"?"selected":""}}>{{__('payments.4th_fee')}}</option>
+                                <option value="5th_fee" {{$payment->period=="5th_fee"?"selected":""}}>{{__('payments.5th_fee')}}</option>
+                                <option value="6th_fee" {{$payment->period=="6th_fee"?"selected":""}}>{{__('payments.6th_fee')}}</option>
+                                <option value="7th_fee" {{$payment->period=="7th_fee"?"selected":""}}>{{__('payments.7th_fee')}}</option>
+                                <option value="8th_fee" {{$payment->period=="8th_fee"?"selected":""}}>{{__('payments.8th_fee')}}</option>
+                                <option value="9th_fee" {{$payment->period=="9th_fee"?"selected":""}}>{{__('payments.9th_fee')}}</option>
+                                <option value="10th_fee" {{$payment->period=="10th_fee"?"selected":""}}>{{__('payments.10th_fee')}}</option>
+                                <option value="11th_fee" {{$payment->period=="11th_fee"?"selected":""}}>{{__('payments.11th_fee')}}</option>
+                                <option value="12th_fee" {{$payment->period=="12th_fee"?"selected":""}}>{{__('payments.12th_fee')}}</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-4">

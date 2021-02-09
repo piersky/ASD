@@ -21,12 +21,12 @@
                     @method('PATCH')
                     <div class="row">
                         <div class="form-group col-sm-5">
-                            <label for="firstname"><strong>{{__('athletes.First Name')}}*</strong></label>
-                            <input type="text" required name="firstname" id="firstname" class="form-control" value="{{$athlete->firstname}}">
-                        </div>
-                        <div class="form-group col-sm-5">
                             <label for="lastname"><strong>{{__('athletes.Last Name')}}*</strong></label>
                             <input type="text" required name="lastname" id="lastname" class="form-control" value="{{$athlete->lastname}}">
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <label for="firstname"><strong>{{__('athletes.First Name')}}*</strong></label>
+                            <input type="text" required name="firstname" id="firstname" class="form-control" value="{{$athlete->firstname}}">
                         </div>
                         <div class="form-group col-sm-2">
                             <label for="gender"><strong>{{__('athletes.Gender')}}</strong></label>

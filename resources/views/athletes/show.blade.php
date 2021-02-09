@@ -10,7 +10,9 @@
             </div>
             <div class="col-sm-6">
                 <h1 class="text-uppercase">{{$athlete->lastname}} {{$athlete->firstname}}</h1>
-                <h2>{{__('athletes.Group:')}} {{count($group)>0?$group[0]->name:""}} <a href="{{route('groups.composition.components', $group[0]->id)}}"><span class="fa fa-arrow-right"></span></a></h2>
+                @if($group ?? '')
+                    <h2>{{__('athletes.Group:')}} {{$group[0]->name}} <a href="{{route('groups.composition.components', $group[0]->id)}}"><span class="fa fa-arrow-right"></span></a></h2>
+                @endif
             </div>
             <div class="col-sm-2">
                 <a href="/athletes/{{$athlete->id}}/edit" class="btn btn-success"><span class="fa fa-pencil-alt"></span></a>

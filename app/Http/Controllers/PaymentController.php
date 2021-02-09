@@ -189,9 +189,23 @@ class PaymentController extends Controller
         $payment->note = $request->get('note');
         $payment->updated_by = Auth::user()->id;
 
-        $payment->save();
+        //Check if exists a similar payment
+        $exists_payment_period = DB::table('payments')
+            ->where('athlete_id', '=', $request->get('athlete_id'))
+            ->where('period', '=', $request->get('period'))
+            //TODO: change the year with settings
+            ->where('year', '=', '2020')
+            ->get();
 
-        return redirect('payments')->with('success', 'Payment updated');
+        if (count($exists_payment_period) == 0) {
+            $payment->save();
+            return view('payments.payments', [
+                'payments' => $this->getPayments(),
+                'payment_old' => $payment
+            ])->with('success', 'Payment saved');
+        } else {
+            return redirect('/payments')->with('error', 'Pagamento già presente per il periodo e l\'atleta');
+        }
     }
 
     /**

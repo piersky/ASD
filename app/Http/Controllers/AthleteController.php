@@ -181,7 +181,8 @@ class AthleteController extends Controller
             ->where('group_translations.lang_id', '=', 'it')
             ->get();
 
-        return view('athletes.show', ['athlete' => $athlete, 'group' => $group]);
+        if (count($group)>0) return view('athletes.show', ['athlete' => $athlete, 'group' => $group]);
+        else return view('athletes.show', ['athlete' => $athlete, 'group' => null]);
     }
 
     /**
@@ -292,6 +293,7 @@ class AthleteController extends Controller
         //TODO: need to be deleted the payments & group compsitions too
         $group_owned = DB::table('group_compositions')
             ->where('athlete_id', '=', $id)
+            //TODO: use settings
             ->where('year', '=', '2020')
             ->delete();
 
@@ -410,8 +412,19 @@ class AthleteController extends Controller
     {
         $q = $request->get('q');
 
-        $athletes = Athlete::where('firstname', 'LIKE', '%'.$q.'%')
-            ->orWhere('lastname', 'LIKE', '%'.$q.'%')
+        $athletes = DB::table('athletes')
+            ->leftJoin('group_compositions', 'athletes.id', '=', 'group_compositions.athlete_id')
+            ->leftJoin('groups', 'group_compositions.group_id', '=', 'groups.id')
+            ->leftJoin('group_translations', 'group_translations.group_id', '=', 'groups.id')
+            ->select(
+                'athletes.*',
+                'group_translations.name as group_name',
+                'groups.id as group_id'
+            )
+            //TODO: use settings instead
+            ->whereRaw('(group_translations.lang_id = "it" OR group_translations.lang_id IS NULL) AND (athletes.firstname LIKE "%'.$q.'%" OR athletes.lastname LIKE "%'.$q.'%")')
+            ->orderBy('athletes.lastname')
+            ->orderBy('athletes.firstname')
             ->paginate(50);
 
         if(count($athletes) > 0) return view('athletes.athletes', ['athletes' => $athletes]);

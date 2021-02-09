@@ -2,7 +2,7 @@
 
 ## ASD - Associazione Sportiva Dilettantistica
 
-ASD is a sport association management software with the aim to help amateurish associations in managing:
+ASD is a sport association management software with the aim to help amateurish sport associations in managing:
 - athletes' informations:
   - address
   - contacts
