@@ -20,12 +20,27 @@ class GroupController extends Controller
     {
         $groups = DB::table('groups')
             ->join('group_translations', 'groups.id', '=', 'group_translations.group_id')
-            ->select(['groups.id', 'group_translations.name'])
+            ->select([
+                'groups.id',
+                'group_translations.name'
+            ])
             ->where('groups.is_active', '=', 1)
             //TODO: Use settings instead
             ->where('group_translations.lang_id', '=', 'it')
             ->orderBy('group_translations.name')
             ->get();
+
+        $total_payed = [];
+
+        foreach ($groups as $group) {
+            $total_group_payed = DB::table('payments', 'p')
+                //TODO: use settings
+                ->where('year', '=', '2020')
+                ->whereRaw('athlete_id IN (SELECT athlete_id FROM group_compositions WHERE year = "2020" AND group_id = '.$group->id.')')
+                ->sum('p.amount');
+
+            $total_payed[$group->id] = $total_group_payed;
+        }
 
         for ($i = 0; $i < count($groups); $i++) {
             $n = DB::table('group_compositions')
@@ -35,7 +50,10 @@ class GroupController extends Controller
             $groups[$i]->total = count($n)>0?count($n):0;
         }
 
-        return view('groups.groups', ['groups' => $groups]);
+        return view('groups.groups', [
+            'groups' => $groups,
+            'total_payed' => $total_payed
+            ]);
     }
 
     /**
@@ -73,6 +91,7 @@ class GroupController extends Controller
         $group_translation = new GroupTranslation([
             'group_id' => $group->id,
             'name' => $request->input('name'),
+            //TODO: use settings
             'lang_id' => 'it',//env('APP_LOCAL', 'en'),
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id
@@ -261,7 +280,11 @@ class GroupController extends Controller
             '9th_fee',
             '10th_fee',
             '11th_fee',
-            '12th_fee'
+            '12th_fee',
+            '1ex_fee',
+            '2ex_fee',
+            '3ex_fee',
+            '4ex_fee'
         ];
 
         $athletes = DB::table('group_compositions')

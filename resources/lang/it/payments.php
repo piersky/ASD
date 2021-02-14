@@ -36,5 +36,9 @@ return [
     "Total" => "Totale",
     "Amount must be grater then zero." => "L'importo deve essere maggiore di 0!",
     "No payments yet." => 'Nessun pagamento trovato.',
-    "Note" => "Note"
+    "Note" => "Note",
+    "1ex_fee" => "13° rata",
+    "2ex_fee" => "14° rata",
+    "3ex_fee" => "15° rata",
+    "4ex_fee" => "16° rata"
 ];

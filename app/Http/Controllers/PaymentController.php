@@ -22,6 +22,7 @@ class PaymentController extends Controller
     }
 
     private function getPayments(){
+        //TODO: Add filter for extra fees
         return DB::table('payments')
             ->join('athletes', 'payments.athlete_id', '=', 'athletes.id')
             ->select(
@@ -53,7 +54,8 @@ class PaymentController extends Controller
 
         return view('payments.createpayment', [
             'athletes' => $athletes,
-            'payment' => $payment]);
+            'payment' => $payment
+        ]);
     }
 
     public function duplicate($id) {
@@ -110,7 +112,7 @@ class PaymentController extends Controller
             ->where('year', '=', '2020')
             ->get();
 
-        if (count($exists_payment_period) == 0) {
+        if (count($exists_payment_period) == 0 || is_null($exists_payment_period)) {
             $payment->save();
             return view('payments.payments', [
                 'payments' => $this->getPayments(),
@@ -171,6 +173,8 @@ class PaymentController extends Controller
     {
         $payment = Payment::find($id);
 
+        $period_old = $payment->period;
+
         $rules = [
             'amount' => 'numeric|gt:0'
         ];
@@ -197,7 +201,13 @@ class PaymentController extends Controller
             ->where('year', '=', '2020')
             ->get();
 
-        if (count($exists_payment_period) == 0) {
+        if (count($exists_payment_period) == 0 || is_null($exists_payment_period)) {
+            $payment->save();
+            return view('payments.payments', [
+                'payments' => $this->getPayments(),
+                'payment_old' => $payment
+            ])->with('success', 'Payment saved');
+        } elseif (count($exists_payment_period) == 1 && $period_old == $request->input('period')) {
             $payment->save();
             return view('payments.payments', [
                 'payments' => $this->getPayments(),
@@ -216,15 +226,19 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        return "NO DESTROY POSSIBLE";
+        return "NO DESTROY POSSIBLE At THE MOMENT";
     }
 
     public function search(Request $request)
     {
         $q = $request->get('q');
 
-        $payments = DB::table('payments')
-            ->join('athletes', 'payments.athlete_id', '=', 'athletes.id')
+        $payments = DB::table('payments AS p')
+            ->join('athletes', 'p.athlete_id', '=', 'athletes.id')
+            ->select('p.*',
+                'athletes.id AS athlete_id',
+                'athletes.firstname',
+                'athletes.lastname')
             ->where('athletes.firstname', 'LIKE', '%'.$q.'%')
             ->orWhere('athletes.lastname', 'LIKE', '%'.$q.'%')
             ->paginate(50);

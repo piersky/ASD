@@ -8,5 +8,6 @@ return [
     "Group name" => "Nome del gruppo",
     "Name" => "Nome",
     "Is active" => "Attivo",
-    "Total components" => "Nr. Componenti"
+    "Total components" => "Nr. Componenti",
+    "Total payed" => "Totale pagato"
 ];

@@ -34,6 +34,7 @@
                                 <th class="text-uppercase">ID</th>
                                 <th class="text-uppercase">{{__('groups.Group name')}}</th>
                                 <th class="text-uppercase text-center">{{__('groups.Total components')}}</th>
+                                <th class="text-uppercase text-center">{{__('groups.Total payed')}}</th>
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                 <td>{{$group->id}}</td>
                                 <td class="text-uppercase" onclick="location.href='{{route('groups.composition.components', $group->id)}}';">{{$group->name}}</td>
                                 <td class="text-center">{{$group->total}}</td>
+                                <td class="text-right">@if($total_payed ?? '')@money($total_payed[$group->id])@endif</td>
                                 <td class="d-flex justify-content-end">
                                     <a href="/groups/{{$group->id}}/pdf" class="btn btn-danger mr-1"><span class="fa fa-file-pdf-o"></span></a>
                                     <a href="{{route('groups.payments', $group->id)}}" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>

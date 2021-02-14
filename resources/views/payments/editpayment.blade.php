@@ -56,6 +56,10 @@
                                 <option value="10th_fee" {{$payment->period=="10th_fee"?"selected":""}}>{{__('payments.10th_fee')}}</option>
                                 <option value="11th_fee" {{$payment->period=="11th_fee"?"selected":""}}>{{__('payments.11th_fee')}}</option>
                                 <option value="12th_fee" {{$payment->period=="12th_fee"?"selected":""}}>{{__('payments.12th_fee')}}</option>
+                                <option value="1ex_fee" {{$payment->period=="1ex_fee"?"selected":""}}>{{__('payments.1ex_fee')}}</option>
+                                <option value="2ex_fee" {{$payment->period=="2ex_fee"?"selected":""}}>{{__('payments.2ex_fee')}}</option>
+                                <option value="3ex_fee" {{$payment->period=="3ex_fee"?"selected":""}}>{{__('payments.3ex_fee')}}</option>
+                                <option value="4ex_fee" {{$payment->period=="4ex_fee"?"selected":""}}>{{__('payments.4ex_fee')}}</option>
                             </select>
                         </div>
                         <div class="form-group col-sm-4">

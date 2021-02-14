@@ -59,6 +59,10 @@
                                     <option value="10th_fee" {{$payment_old->period=="10th_fee"?"selected":""}}>{{__('payments.10th_fee')}}</option>
                                     <option value="11th_fee" {{$payment_old->period=="11th_fee"?"selected":""}}>{{__('payments.11th_fee')}}</option>
                                     <option value="12th_fee" {{$payment_old->period=="12th_fee"?"selected":""}}>{{__('payments.12th_fee')}}</option>
+                                    <option value="1ex_fee" {{$payment_old->period=="1ex_fee"?"selected":""}}>{{__('payments.1ex_fee')}}</option>
+                                    <option value="2ex_fee" {{$payment_old->period=="2ex_fee"?"selected":""}}>{{__('payments.2ex_fee')}}</option>
+                                    <option value="3ex_fee" {{$payment_old->period=="3ex_fee"?"selected":""}}>{{__('payments.3ex_fee')}}</option>
+                                    <option value="4ex_fee" {{$payment_old->period=="4ex_fee"?"selected":""}}>{{__('payments.4ex_fee')}}</option>
                                 </select>
                             @else
                                 <select id="period" name="period" class="form-control">
@@ -75,6 +79,10 @@
                                     <option value="10th_fee">{{__('payments.10th_fee')}}</option>
                                     <option value="11th_fee">{{__('payments.11th_fee')}}</option>
                                     <option value="12th_fee">{{__('payments.12th_fee')}}</option>
+                                    <option value="1ex_fee">{{__('payments.1ex_fee')}}</option>
+                                    <option value="2ex_fee">{{__('payments.2ex_fee')}}</option>
+                                    <option value="3ex_fee">{{__('payments.3ex_fee')}}</option>
+                                    <option value="4ex_fee">{{__('payments.4ex_fee')}}</option>
                                 </select>
                             @endif
                         </div>

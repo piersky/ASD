@@ -38,11 +38,16 @@
                     </div>
                     <div class="row">
                         <div class="form-check form-switch">
-                            <input type="checkbox" name="send_email_on_new_payment" id="send_email_on_new_payment" class="form-check-input" {{$keys['send_email_on_new_payment']?"checked":""}}>
+                            <input type="checkbox" name="send_email_on_new_payment" id="send_email_on_new_payment" class="form-check-input" {{$keys['send_email_on_new_payment']=="1"?"checked":""}}>
                             <label for="send_email_on_new_payment" class="form-check-label" ><strong>{{__('settings.Send email on new payment')}}</strong></label>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="form-check form-switch">
+                            <input type="checkbox" name="show_extra_fees" id="show_extra_fees" class="form-check-input" {{$keys['show_extra_fees']=="1"?"checked":""}}>
+                            <label for="show_extra_fees" class="form-check-label"><strong>{{__('settings.Show extra fees')}}</strong></label>
+                        </div>
+                    </div>
                     <a href="/" class="btn btn-danger">{{__('Cancel')}}</a>
                     <button type="submit" class="btn btn-primary text-uppercase">{{__('Submit')}}</button>
                 </form>

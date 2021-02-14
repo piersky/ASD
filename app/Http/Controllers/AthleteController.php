@@ -330,7 +330,11 @@ class AthleteController extends Controller
             '9th_fee',
             '10th_fee',
             '11th_fee',
-            '12th_fee'
+            '12th_fee',
+            '1ex_fee',
+            '2ex_fee',
+            '3ex_fee',
+            '4ex_fee'
         ];
 
         $check = DB::table('athletes')

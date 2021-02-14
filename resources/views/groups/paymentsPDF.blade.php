@@ -7,6 +7,7 @@
     <style>
         @page {margin: 10px 10px 10px 10px;}
         body {font-size: 10px;}
+        .column_h {width: 5%}
     </style>
 </head>
 <body>
@@ -16,21 +17,25 @@
         <table class="table table-striped mx-auto w-auto">
             <thead class="thead-dark">
             <tr>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('Athlete')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('Enrollment')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('1st_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('2nd_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('3rd_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('4th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('5th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('6th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('7th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('8th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('9th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('10th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('11th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase"><small>{{__('12th_fee')}}</small></th>
-                <th style="width: 7%" scope="col" class="text-uppercase">{{__('Total')}}</th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('Athlete')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('Enrollment')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('1st_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('2nd_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('3rd_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('4th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('5th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('6th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('7th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('8th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('9th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('10th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('11th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('12th_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('1ex_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('2ex_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('3ex_fee')}}</small></th>
+                <th scope="col" class="text-uppercase column_h"><small>{{__('4ex_fee')}}</small></th>
+                <th style="width: 10%" scope="col" class="text-uppercase">{{__('Total')}}</th>
             </tr>
             </thead>
             <tbody>

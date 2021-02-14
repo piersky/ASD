@@ -39,6 +39,10 @@
     "POS": "CARTA DI CREDITO / POS",
     "CHECK": "ASSEGNO",
     "OTHER METHODS": "ALTRI METODI",
+    "1ex_fee": "13° rata",
+    "2ex_fee": "14° rata",
+    "3ex_fee": "15° rata",
+    "4ex_fee": "16° rata",
 
     "Last stored payment": "Ultimo pagamento inserito",
     "Last payment is ": "L'ultimo pagamento è ",

@@ -45,6 +45,10 @@
                                 <th scope="col" class="text-uppercase">{{__('10th_fee')}}</th>
                                 <th scope="col" class="text-uppercase">{{__('11th_fee')}}</th>
                                 <th scope="col" class="text-uppercase">{{__('12th_fee')}}</th>
+                                <th scope="col" class="text-uppercase">{{__('1ex_fee')}}</th>
+                                <th scope="col" class="text-uppercase">{{__('2ex_fee')}}</th>
+                                <th scope="col" class="text-uppercase">{{__('3ex_fee')}}</th>
+                                <th scope="col" class="text-uppercase">{{__('4ex_fee')}}</th>
                             </tr>
                         </thead>
                         @if(count($payments)>0)
