@@ -42,9 +42,24 @@ class GroupCompositionController extends Controller
             ->where('group_translations.lang_id', '=', 'it')
             ->first();
 
+        $total_payed = [];
+        $total_group_payed = 0.0;
+        foreach ($groupCompositions as $group_athlete){
+            $total_athlete_payed = DB::table('payments', 'p')
+                //TODO: use settings
+                ->where('year', '=', '2020')
+                ->where('athlete_id', '=', $group_athlete->athlete_id)
+                ->sum('p.amount');
+
+            $total_payed[$group_athlete->athlete_id] = $total_athlete_payed;
+            $total_group_payed += $total_athlete_payed;
+        }
+
         return view('groups.composition.components', [
             'groupcompositions' => $groupCompositions,
-            'group' => $group
+            'group' => $group,
+            'total_payed' => $total_payed,
+            'total_group_payed' => $total_group_payed
         ]);
     }
 

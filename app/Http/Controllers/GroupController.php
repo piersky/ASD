@@ -31,7 +31,7 @@ class GroupController extends Controller
             ->get();
 
         $total_payed = [];
-
+        $total = 0.0;
         foreach ($groups as $group) {
             $total_group_payed = DB::table('payments', 'p')
                 //TODO: use settings
@@ -40,6 +40,7 @@ class GroupController extends Controller
                 ->sum('p.amount');
 
             $total_payed[$group->id] = $total_group_payed;
+            $total += $total_group_payed;
         }
 
         for ($i = 0; $i < count($groups); $i++) {
@@ -52,7 +53,8 @@ class GroupController extends Controller
 
         return view('groups.groups', [
             'groups' => $groups,
-            'total_payed' => $total_payed
+            'total_payed' => $total_payed,
+            'total' => $total
             ]);
     }
 

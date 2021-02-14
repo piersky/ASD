@@ -5,5 +5,6 @@ return [
     "Name" => "Nome",
     "No athletes yet." => "Ancora nessun atleta.",
     "Add to" => "Aggiungi a",
-    "Athlete" => "Nome atleta"
+    "Athlete" => "Nome atleta",
+    "Total payed" => "Totale pagato"
 ];

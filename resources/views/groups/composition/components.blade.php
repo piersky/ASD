@@ -41,6 +41,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th class="text-uppercase">{{__('group_compositions.Name')}}</th>
+                            <th class="text-uppercase text-center">{{__('group_compositions.Total payed')}}</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
@@ -48,12 +49,14 @@
                         @foreach($groupcompositions as $groupcomponent)
                             <tr id="tr-{{$groupcomponent->id}}">
                                 <td><a href="/athletes/{{$groupcomponent->athlete_id}}">{{$groupcomponent->lastname}} {{$groupcomponent->firstname}}</a></td>
+                                <td class="text-right">@if($total_payed ?? '')@money($total_payed[$groupcomponent->athlete_id])@endif</td>
                                 <td class="d-flex justify-content-end">
                                     <a href="/athletes/{{$groupcomponent->athlete_id}}/payments" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
                                     <button type="button" class="btn btn-danger delete" data-id="{{$groupcomponent->id}}" data-url="/groups/component/{{$groupcomponent->id}}"><span class="fa fa-trash"></span></button>
                                 </td>
                             </tr>
                         @endforeach
+                        <tr><td></td><td class="text-right"><strong>@money($total_group_payed)</strong></td><td></td></tr>
                         @else
                             <tr><td><h2>{{__('group_compositions.No athletes yet.')}}</h2></td></tr>
                         @endif

@@ -53,6 +53,7 @@
                                     @endcan
                             </tr>
                         @endforeach
+                        <tr><td></td><td></td><td></td><td class="text-right"><strong>@money($total)</strong></td><td></td></tr>
                         @else
                             <tr><td><h2>{{__('groups.No group yet.')}}</h2></td></tr>
                         </tbody>
