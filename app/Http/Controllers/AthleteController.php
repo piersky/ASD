@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupComposition;
+use App\Settings;
 use Illuminate\Http\Request;
 use App\Models\Athlete;
 use Illuminate\Support\Facades\DB;
@@ -25,8 +26,10 @@ class AthleteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Settings $settings)
     {
+        if (!$settings->has('lang_id')) $settings->put('lamg_id', 'it');
+
         $athletes = DB::table('athletes')
             ->leftJoin('group_compositions', 'athletes.id', '=', 'group_compositions.athlete_id')
             ->leftJoin('groups', 'group_compositions.group_id', '=', 'groups.id')

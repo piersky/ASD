@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Settings;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Settings $settings)
     {
+        if (!$settings->has('lang_id')) $settings->put('lang_id', 'en');
+        if (!$settings->has('year')) $settings->put('year', '2020');
+
         $last_payment = DB::table('payments')
             ->join('athletes', 'payments.athlete_id', '=', 'athletes.id')
             ->select(
