@@ -282,7 +282,7 @@ class AthleteController extends Controller
         $messaggio = $res ? 'Athlete   ' . $name . ' Created' : 'Athlete ' . $name . ' was not crerated';
         session()->flash('message', $messaggio);
 
-        return redirect('/athletes')->with('message', 'Athlete updated.');
+        return redirect()->back()->with('message', 'Athlete updated.');
     }
 
     /**

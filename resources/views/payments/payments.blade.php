@@ -43,9 +43,11 @@
                         </div>
                     </form>
                 </div>
+            <div class="row">
                 <div class="col-sm-4 my-2 justify-content-end">
                     {{$payments->links()}}
                 </div>
+            </div>
             @endif
         </div>
         <div class="row">
@@ -75,7 +77,7 @@
                                 <td style="width: 10%" onclick="location.href='/payments/{{$payment->id}}';">{{$payment->note}}</td>
                                 <td class="d-flex justify-content-end"><a href="/payments/{{$payment->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$payment->athlete_id}}/payments" class="btn btn-warning"><span class="fa fa-euro"></span></a>
-                                    <button type="button" class="btn btn-outline-danger" data-id="{{$payment->id}}" data-url="/payments/{{$payment->id}}"><span class="fa fa-trash"></span></button>
+                                    <button type="button" class="btn btn-danger ml-3" data-id="{{$payment->id}}" data-url="/payments/{{$payment->id}}"><span class="fa fa-trash"></span></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -89,10 +91,7 @@
         </div>
         @if($payments ?? '')
             <div class="row">
-                <div class="col-sm-8">
-                    <p></p>
-                </div>
-                <div class="col-sm-4 my-2">
+                <div class="col-sm-5 my-2">
                     {{$payments->links()}}
                 </div>
             </div>
@@ -124,7 +123,7 @@
         $('document').ready(function () {
             $('div.alert').fadeOut(5000);
 
-            $('.btn.btn-outline-danger').on('click', function (evt) {
+            $('.btn.btn-danger').on('click', function (evt) {
                 evt.preventDefault();
 
                 var id = $(this).data('id');
