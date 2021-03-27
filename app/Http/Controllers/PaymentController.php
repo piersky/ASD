@@ -226,7 +226,11 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        return "NO DESTROY POSSIBLE At THE MOMENT";
+        $payment = Payment::find($id);
+        $result = $payment->delete();
+
+        if (request()->ajax()) return '' . $result;
+        else return redirect('/payments')->with('success', 'Payment deleted');
     }
 
     public function search(Request $request)

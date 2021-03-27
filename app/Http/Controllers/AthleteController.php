@@ -28,7 +28,7 @@ class AthleteController extends Controller
      */
     public function index(Settings $settings)
     {
-        if (!$settings->has('lang_id')) $settings->put('lamg_id', 'it');
+        if (!$settings->has('lang_id')) $settings->put('lang_id', 'it');
 
         $athletes = DB::table('athletes')
             ->leftJoin('group_compositions', 'athletes.id', '=', 'group_compositions.athlete_id')

@@ -56,7 +56,9 @@
                                 </td>
                             </tr>
                         @endforeach
-                        <tr><td></td><td class="text-right"><strong>@money($total_group_payed)</strong></td><td></td></tr>
+                        @if($total_group_payed ?? '')
+                            <tr><td></td><td class="text-right"><strong>@money($total_group_payed)</strong></td><td></td></tr>
+                            @endif
                         @else
                             <tr><td><h2>{{__('group_compositions.No athletes yet.')}}</h2></td></tr>
                         @endif

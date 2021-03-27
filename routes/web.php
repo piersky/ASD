@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/payments', [PaymentController::class, 'store']);
     Route::get('/payments/{id}/edit', [PaymentController::class, 'edit'])->name('payments.edit');
     Route::patch('/payments/{id}', [PaymentController::class, 'update'])->name('payments.update');
+    Route::delete('/payments/{id}', [PaymentController::class, 'destroy'])->name('payments.delete');
     Route::post('/payments/search', [PaymentController::class, 'search']);
     Route::get('/payments/{id}', [PaymentController::class, 'show'])->name('payments.show');
     Route::get('payments/{id}/duplicate', [PaymentController::class, 'duplicate'])->name('payments.duplicate');

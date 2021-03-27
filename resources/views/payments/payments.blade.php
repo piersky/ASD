@@ -66,7 +66,7 @@
                         </thead>
                         <tbody>
                         @foreach($payments as $payment)
-                            <tr>
+                            <tr id="tr-{{$payment->id}}">
                                 <td onclick="location.href='/payments/{{$payment->id}}';">{{date('d/m/Y', strtotime($payment->payment_date))}}</td>
                                 <td><a href="/athletes/{{$payment->athlete_id}}">{{$payment->lastname}} {{$payment->firstname}}</a></td>
                                 <td onclick="location.href='/payments/{{$payment->id}}';"><div class="d-flex justify-content-center">@money($payment->amount)</div></td>
@@ -75,6 +75,7 @@
                                 <td style="width: 10%" onclick="location.href='/payments/{{$payment->id}}';">{{$payment->note}}</td>
                                 <td class="d-flex justify-content-end"><a href="/payments/{{$payment->id}}/edit" class="btn btn-light mr-1"><span class="fa fa-pencil-alt"></span></a>
                                     <a href="/athletes/{{$payment->athlete_id}}/payments" class="btn btn-warning"><span class="fa fa-euro"></span></a>
+                                    <button type="button" class="btn btn-outline-danger" data-id="{{$payment->id}}" data-url="/payments/{{$payment->id}}"><span class="fa fa-trash"></span></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -97,11 +98,59 @@
             </div>
         @endif
     </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title" id="exampleModalLabel">{{__('Confirm')}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{__('Please, click on DELETE to confirm the record cancellation.')}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Close')}}</button>
+                    <button type="submit" class="btn btn-danger text-uppercase" id ="btn-elimina">{{__('Delete')}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('footer')
     <script>
         $('document').ready(function () {
             $('div.alert').fadeOut(5000);
+
+            $('.btn.btn-outline-danger').on('click', function (evt) {
+                evt.preventDefault();
+
+                var id = $(this).data('id');
+                var url = $(this).data('url');
+                var tr = $('#tr-'+id);
+
+                $('#deleteModal').modal('show');
+
+                $('#btn-elimina').on('click', function () {
+                    $.ajax({
+                        url: url,
+                        method: 'DELETE',
+                        data: {
+                            '_token': '{{csrf_token()}}'
+                        },
+                        complete: function (resp) {
+                            if (resp.responseText == 1) {
+                                tr.remove();
+                                $('#deleteModal').modal('hide');
+                            } else {
+                                console.log(resp);
+                            }
+                        }
+                    });
+                });
+            });
         });
     </script>
 @endsection
