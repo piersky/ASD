@@ -437,4 +437,9 @@ class AthleteController extends Controller
         if(count($athletes) > 0) return view('athletes.athletes', ['athletes' => $athletes]);
         else return view ('athletes.athletes')->with('message', 'Sorry, no Athletes found.');
     }
+
+    public function fiscalCertification($id)
+    {
+
+    }
 }

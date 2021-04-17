@@ -29,6 +29,10 @@ class CreateParentsTable extends Migration
             $table->foreign('partner_id')->on('parents')->references('id');
             $table->boolean('wants_tax_certificate')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->bigInteger('created_by')->unsigned();
+            $table->foreign('created_by')->on('users')->references('id');
+            $table->bigInteger('updated_by')->unsigned()->nullable();
+            $table->foreign('updated_by')->on('users')->references('id');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PaymentGroupExport;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,8 @@ class PaymentController extends Controller
         return view('payments.payments', ['payments' => $payments]);
     }
 
-    private function getPayments(){
+    private function getPayments()
+    {
         //TODO: Add filter for extra fees
         return DB::table('payments')
             ->join('athletes', 'payments.athlete_id', '=', 'athletes.id')
@@ -45,7 +47,7 @@ class PaymentController extends Controller
     public function create()
     {
         $athletes = DB::table('athletes')
-            ->where('is_active','=', '1')
+            ->where('is_active', '=', '1')
             ->orderBy('lastname')
             ->orderBy('firstname')
             ->get();
@@ -58,9 +60,10 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function duplicate($id) {
+    public function duplicate($id)
+    {
         $athletes = DB::table('athletes')
-            ->where('is_active','=', '1')
+            ->where('is_active', '=', '1')
             ->orderBy('lastname')
             ->orderBy('firstname')
             ->get();
@@ -79,7 +82,7 @@ class PaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -126,7 +129,7 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -134,7 +137,7 @@ class PaymentController extends Controller
         $payment = Payment::find($id);
 
         $athlete = DB::table('athletes')
-            ->where('id','=', $payment->athlete_id)
+            ->where('id', '=', $payment->athlete_id)
             ->select('lastname', 'firstname')
             ->orderBy('lastname')
             ->orderBy('firstname')
@@ -146,13 +149,13 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $athletes = DB::table('athletes')
-            ->where('is_active','=', '1')
+            ->where('is_active', '=', '1')
             ->orderBy('lastname')
             ->orderBy('firstname')
             ->get();
@@ -165,8 +168,8 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -221,7 +224,7 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -243,11 +246,11 @@ class PaymentController extends Controller
                 'athletes.id AS athlete_id',
                 'athletes.firstname',
                 'athletes.lastname')
-            ->where('athletes.firstname', 'LIKE', '%'.$q.'%')
-            ->orWhere('athletes.lastname', 'LIKE', '%'.$q.'%')
+            ->where('athletes.firstname', 'LIKE', '%' . $q . '%')
+            ->orWhere('athletes.lastname', 'LIKE', '%' . $q . '%')
             ->paginate(50);
 
-        if (count($payments)>0) return view('payments.payments', ['payments' => $payments]);
-        else return view('payments.payments')->with('message', 'Sorry no payments found ('.$q.')');
+        if (count($payments) > 0) return view('payments.payments', ['payments' => $payments]);
+        else return view('payments.payments')->with('message', 'Sorry no payments found (' . $q . ')');
     }
 }

@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('/athletes/{id}', [AthleteController::class, 'destroy']);
     Route::get('/athletes/{id}/payments', [AthleteController::class, 'payments'])->name('athletes.payments');
     Route::post('/athletes/search', [AthleteController::class, 'search'])->name('athletes.search');
+    Route::get('/athletes/{id}/fiscal_cert', [AthleteController::class, 'fiscalCertification'])->name('athletes.fiscal_cert');
 
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
     Route::get('/payments/create', [PaymentController::class, 'create'])->name('payments.create');
@@ -56,6 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/groups/{id}/payments', [GroupController::class, 'payments'])->name('groups.payments');
     Route::get('/groups/{id}/paymentsPDF', [GroupController::class, 'paymentsPDF'])->name('groups.paymentsPDF');
     Route::get('/groups/{id}/pdf', [GroupController::class, 'pdf'])->name('groups.pdf');
+    Route::get('/groups/{id}/payments_xls', [GroupController::class, 'payments_group_excels'])->name('groups.paymemnts_export_xls');
 
     Route::get('/groups/{id}/composition', [GroupCompositionController::class, 'index'])->name('groups.composition.components');
     Route::get('/groups/{id}/composition/add', [GroupCompositionController::class, 'create'])->name('groups.composition.add');

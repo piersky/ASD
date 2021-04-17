@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PaymentGroupExport;
 use App\Models\Group;
 use App\Models\GroupTranslation;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -227,6 +228,26 @@ class GroupController extends Controller
         return $pdf->download('payments_'.$group->name.'.pdf');
     }
 
+    public function payments_group_excels($id)
+    {
+        $group = DB::table('groups')
+            ->leftJoin('group_translations', 'group_translations.group_id', '=', 'groups.id')
+            ->select('groups.id', 'group_translations.name')
+            ->where('groups.id', '=', $id)
+            //TODO: Use settings instead
+            ->where('group_translations.lang_id', '=', 'it')
+            ->first();
+
+        //return \Excel::download(new PaymentGroupExport($id), 'payments_group_'.$group->name.'.xlsx');
+        \Excel::download(function($excel) {
+            $excel->fromArray(array(
+                array('data1', 'data2'),
+                array('data3', 'data4')
+            ));
+
+        }, 'filename.xls');
+    }
+
     public function pdf($id)
     {
         $groupcomponents = DB::table('group_compositions AS g')
@@ -316,6 +337,8 @@ class GroupController extends Controller
                         'id'
                     )
                     ->where('athlete_id', '=', $athletes[$i]->athlete_id)
+                    // TODO: use settings instead
+                    ->where('year', '=', '2020')
                     ->orderBy('period')
                     ->get();
 
