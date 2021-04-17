@@ -23,6 +23,7 @@ class Parents extends Model
         'country',
         'mobile',
         'phone',
+        'email',
         'conjugality',
         'partner_id',
         'wants_tax_certificate',

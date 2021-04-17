@@ -24,8 +24,9 @@ class CreateParentsTable extends Migration
             $table->string('postal_code', 10)->nullable();
             $table->string('province');
             $table->string('country')->default('ITA');
-            $table->string('mobile');
-            $table->string('phone');
+            $table->string('mobile')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email', 50)->nullable();
             $table->enum('conjugality', array('MARRIED', 'SINGLE', 'DIVORCED', 'OTHER'));
             $table->bigInteger('partner_id')->nullable()->unsigned();
             $table->foreign('partner_id')->on('parents')->references('id');
