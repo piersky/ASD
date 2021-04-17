@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Pagination\Paginator;
 use App\Settings;
+use App\SettingsUser;
 
 class AppServiceProvider extends ServiceProvider
 {
     public $settings;
+    public $userSettings;
 
     /**
      * Register any application services.
@@ -21,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->settings = $this->app->singleton(Settings::class, function () {
             return Settings::make(storage_path('app/settings.json'));
+        });
+
+        $this->userSettings = $this->app->singleton(SettingsUser::class, function () {
+            return SettingsUser::make(storage_path('app/user_settings.json'));
         });
     }
 

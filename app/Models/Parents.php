@@ -16,6 +16,8 @@ class Parents extends Model
         'lastname',
         'gender',
         'fiscal_code',
+        'address',
+        'postal_code',
         'municipality',
         'province',
         'country',

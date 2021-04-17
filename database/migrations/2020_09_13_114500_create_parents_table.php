@@ -19,7 +19,9 @@ class CreateParentsTable extends Migration
             $table->string('lastname');
             $table->enum('gender', array('F', 'M'))->default('F');
             $table->string('fiscal_code')->nullable();
+            $table->string('address');
             $table->string('municipality')->nullable();
+            $table->string('postal_code', 10)->nullable();
             $table->string('province');
             $table->string('country')->default('ITA');
             $table->string('mobile');

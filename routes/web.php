@@ -64,7 +64,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/groups/{id}/composition', [GroupCompositionController::class, 'add'])->name('groups.composition');
     Route::delete('/groups/component/{id}', [GroupCompositionController::class, 'destroy']);
 
-    Route::get('/parents', [ParentController::class, 'index']);
+    Route::get('/parents', [ParentController::class, 'index'])->name('parents');
+    Route::get('/parents/create', [ParentController::class, 'create'])->name('parents.createparent');
+    Route::post('/parents/search', [ParentController::class, 'search'])->name('parents.search');
+    Route::post('/parents', [ParentController::class, 'store']);
+    Route::get('/parents/{id}', [ParentController::class, 'show'])->name('parents.show');
+    Route::delete('/parents/{id}', [ParentController::class, 'destroy'])->name('parents.delete');
+    Route::get('/parents/{id}/edit', [ParentController::class, 'edit'])->name('parents.edit');
+    Route::patch('/parents/{id}', [ParentController::class, 'update'])->name('parents.update');
 
     Route::get('/settings', [SettingController::class, 'edit']);
     Route::patch('/settings', [SettingController::class, 'update'])->name('settings.update');
