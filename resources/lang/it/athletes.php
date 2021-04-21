@@ -12,6 +12,7 @@ return [
     "First Name" => "Nome",
     "Last Name" => "Cognome",
     "Date of birth" => "Data di nascita",
+    "Age" => "Età",
     "Municipality of birth" => "Comune di nascita",
     "Province of birth" => "Provincia di nascita",
     "Birth Country" => "Nazione di nascita",

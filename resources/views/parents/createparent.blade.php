@@ -78,8 +78,8 @@
                             <input type="checkbox" name="wants_tc" id="wants_tc" class="form-control" value="{{old('wants_tc')}}">
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="conjungality"><strong>{{__('parents.Conjungality')}}</strong></label>
-                            <select id="conjungality" name="conjungality" class="form-control">
+                            <label for="conjugality"><strong>{{__('parents.Conjugality')}}</strong></label>
+                            <select id="conjugality" name="conjugality" class="form-control">
                                 <option value="MARRIED" selected>{{__('parents.Married')}}</option>
                                 <option value="SINGLE">{{__('parents.Single')}}</option>
                                 <option value="DIVORCED">{{__('parents.Divorced')}}</option>

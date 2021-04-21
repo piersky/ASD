@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Parents;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use \Auth;
 
 class ParentController extends Controller
 {
@@ -73,7 +74,7 @@ class ParentController extends Controller
         $parent->postal_code = $request->input('postal_code');
         $parent->province = $request->input('province');
         $parent->country = $request->input('country');
-        $parent->wants_tax_certificate = $request->input('wants_tax_certificate');
+        $parent->wants_tax_certificate = ($request->input('wants_tax_certificate')=='on'?1:0);
         $parent->is_active = ($request->input('is_active')=='on'?1:0);
         $parent->partner_id = $request->input('partner_id');
         $parent->created_by = Auth::user()->id;

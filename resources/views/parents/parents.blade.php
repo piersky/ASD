@@ -66,11 +66,10 @@
                                     <td class="text-center" onclick="location.href='/parents/{{$parent->id}}';">{{$parent->fiscal_code}}</td>
                                     <td class="text-center" onclick="location.href='/parents/{{$parent->id}}';">{{$parent->mobile}} / {{$parent->phone}}</td>
                                     <td class="text-center" onclick="location.href='/parents/{{$parent->id}}';"><a href="mailto:{{$parent->email}}">{{$parent->email}}</a></td>
-                                    <td class="text-center" onclick="location.href='/parents/{{$parent->id}}';">{{$parent->conjungality}}</td>
+                                    <td class="text-center" onclick="location.href='/parents/{{$parent->id}}';">{{$parent->conjugality}}</td>
                                     <td class="text-center" onclick="location.href='/parents/{{$parent->id}}';">{{$parent->partner_lastname}} {{$parent->partner_firstname}}</td>
                                     <td class="d-flex justify-content-end">
                                         <a href="/parents/{{$parent->id}}/edit" class="btn btn-outline-dark mr-1"><span class="fa fa-pencil-alt"></span></a>
-                                        <a href="/parents/{{$parent->id}}/payments" class="btn btn-warning mr-1"><span class="fa fa-euro"></span></a>
                                         @can('isAdmin')
                                             <button type="button" class="btn btn-outline-danger" data-id="{{$parent->id}}" data-url="/parents/{{$parent->id}}"><span class="fa fa-trash"></span></button></td>
                                     @endcan

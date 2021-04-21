@@ -37,7 +37,8 @@ class AthleteController extends Controller
             ->select(
                 'athletes.*',
                 'group_translations.name as group_name',
-                'groups.id as group_id'
+                'groups.id as group_id',
+                DB::raw('FLOOR(DATEDIFF(NOW(), athletes.date_of_birth) / 365) AS age',)
             )
             //TODO: use settings instead
             ->where('group_translations.lang_id', '=', 'it')
@@ -46,7 +47,9 @@ class AthleteController extends Controller
             ->orderBy('athletes.firstname')
             ->paginate(50);
 
-        return view('athletes.athletes', ['athletes' => $athletes]);
+        return view('athletes.athletes', [
+            'athletes' => $athletes
+        ]);
     }
 
     public function orderByGroup( $order = 1)

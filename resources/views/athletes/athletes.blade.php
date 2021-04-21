@@ -51,6 +51,7 @@
                                 <th class="text-left text-uppercase">{{__('athletes.Surname')}} {{__('athletes.Name')}}</th>
                                 <th class="text-center text-uppercase">{{__('F/M')}}</th>
                                 <th class="text-center text-uppercase">{{__('athletes.Date & place of birth')}}</th>
+                                <th class="text-center">{{__('athletes.Age')}}</th>
                                 <th class="text-center text-uppercase">{{__('athletes.Phone')}}</th>
                                 <th class="text-center text-uppercase">{{__('athletes.Email')}}</th>
                                 <th class="text-center text-uppercase"><a href="/athletes/orderbygroup/{{$grouporder ?? ''}}">{{__('athletes.Group')}}</a></th>
@@ -63,6 +64,7 @@
                                 <td class="text-left text-uppercase" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->lastname}} {{$athlete->firstname}}</td>
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->gender=="F"?"F":"M"}}</td>
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{date('d/m/Y', strtotime($athlete->date_of_birth))}} ({{$athlete->birth_province}})</td>
+                                <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->age}}</td>
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';">{{$athlete->phone}}</td>
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';"><a href="mailto:{{$athlete->email}}">{{$athlete->email}}</a></td>
                                 <td class="text-center" onclick="location.href='/athletes/{{$athlete->id}}';"><a href="/groups/{{$athlete->group_id}}/composition">{{$athlete->group_name}}</a></td>
