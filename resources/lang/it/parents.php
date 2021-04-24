@@ -28,7 +28,7 @@ return [
     "Province" => "Provincia",
     "Country" => "Nazione",
     "Is active" => "Attivo",
-    "Conjungality" => "Stato civile",
+    "Conjugality" => "Stato civile",
     "Partner name" => "Partner",
     "Delete?" => "Cancellare ?",
     "Please, confirm to delete this record." => "Si prega di confermare di voler cancellare questo record.",

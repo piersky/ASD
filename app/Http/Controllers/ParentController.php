@@ -93,7 +93,11 @@ class ParentController extends Controller
      */
     public function show($id)
     {
-        //
+        $parent = Parents::find($id);
+
+        return view('parents.showparent', [
+            'parent' => $parent
+        ]);
     }
 
     /**
