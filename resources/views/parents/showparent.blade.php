@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group col-sm-2">
                             <label for="wants_tc"><strong>{{__('parents.Wants tax certificate')}}</strong></label>
-                            <input onclick="return false;" type="checkbox" name="wants_tc" id="wants_tc" class="form-control" value="{{$parent->wants_tc}}">
+                            <input onclick="return false;" type="checkbox" name="wants_tc" id="wants_tc" class="form-control" {{$parent->wants_tax_certificate==1?"checked":""}}>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="conjugality"><strong>{{__('parents.Conjugality')}}</strong></label>
@@ -100,7 +100,6 @@
                     </div>
 
                     <a href="/parents" class="btn btn-danger">{{__('Cancel')}}</a>
-                    <button type="submit" class="btn btn-primary text-uppercase">{{__('Submit')}}</button>
                 </form>
             </div>
         </div>

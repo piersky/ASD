@@ -108,7 +108,11 @@ class ParentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $parent = Parents::find($id);
+
+        return view('parents.editparent', [
+            'parent' => $parent
+        ]);
     }
 
     /**
@@ -120,7 +124,31 @@ class ParentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $parent = Parents::find($id);
+
+        $parent->firstname = $request->input('firstname');
+        $parent->lastname = $request->input('lastname');
+        $parent->gender = $request->input('gender');
+        $parent->fiscal_code = $request->input('fiscal_code');
+        $parent->address = $request->input('address');
+        $parent->postal_code = $request->input('postal_code');
+        $parent->municipality = $request->input('municipality');
+        $parent->province = $request->input('province');
+        $parent->country = $request->input('country');
+        $parent->mobile = $request->input('mobile');
+        $parent->email = $request->input('email');
+        $parent->phone = $request->input('phone');
+        $parent->conjugality = $request->input('conjugality');
+        //$parent->partner_id = $request->input('partner_id');
+        $parent->wants_tax_certificate = ($request->get('wants_tc')=="on"?1:0);
+        $parent->is_active = ($request->get('is_active')=="on"?1:0);
+        $parent->updated_by = Auth::user()->id;
+
+        $parent->save();
+
+        return view('parents.showparent', [
+            'parent' => $parent
+        ]);
     }
 
     /**
